@@ -1,0 +1,113 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const customers = [
+  {
+    title: "Daily Drivers",
+    description:
+      "Preventive maintenance and fast-turn repairs for vehicles you rely on every day — optimized for reliability, fuel efficiency, and long-term ownership.",
+  },
+  {
+    title: "Families",
+    description:
+      "Thorough safety inspections, brake and tire expertise, and dependable repairs designed to protect the people that matter most.",
+  },
+  {
+    title: "Performance Vehicles",
+    description:
+      "Precision diagnostics, high-performance components, and specialist service for drivers who expect more than factory-level results.",
+  },
+  {
+    title: "Small Business Fleets",
+    description:
+      "Proactive fleet maintenance, priority scheduling, and reduced vehicle downtime to keep your operations running without disruption.",
+  },
+];
+---
+
+<section class="bg-gradient-to-b from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="lg:order-last">
+        <div
+          class="lg:sticky lg:top-24 relative overflow-hidden lg:h-[calc(100vh-9rem)] rounded-3xl"
+        >
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="absolute object-cover size-full"
+          >
+            <source src="/videos/car2.mp4" type="video/mp4" />
+          </video>
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+          >
+          </div>
+          <div class="relative z-10 p-8">
+            <Text
+              tag="span"
+              variant="textSM"
+              class="pl-4 font-medium text-white uppercase border-l font-display border-accent-500"
+            >
+              Our customers
+            </Text>
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="mt-8 text-white uppercase font-display"
+            >
+              Who We Work With
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="mt-4 text-base-300 text-balance"
+            >
+              From the family SUV to the weekend track car, we have the
+              expertise to handle it all.
+            </Text>
+            <Button
+              isLink
+              href="/customers"
+              variant="muted"
+              size="sm"
+              class="w-fit">
+            
+            Customer stories
+        
+        </Button>
+          </div>
+        </div>
+      </div>
+     
+      <div class="space-y-8">
+        {
+          customers.map((item) => (
+            <div class="flex flex-col p-6 shadow-2xl pt-42 bg-base-50 rounded-3xl outline-4 outline-base-500/10">
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500 "
+              >
+                {item.title}
+              </Text>
+              <Text
+                tag="p"
+                variant="textBase"
+                class="mt-4 text-base-600 text-balance"
+              >
+                {item.description}
+              </Text>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

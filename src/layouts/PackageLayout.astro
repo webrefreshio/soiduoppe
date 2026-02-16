@@ -1,0 +1,209 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import carFront from "@/images/assets/carFront.jpg";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Check from "@/components/fundations/icons/Check.astro";
+// Components
+import PackageCard from "@/components/packages/PackageCard.astro";
+const { frontmatter } = Astro.props;
+// Get related packages
+import { getCollection } from "astro:content";
+const allPackages = await getCollection("packages");
+const relatedPackages = allPackages
+  .filter((pkg) => pkg.data.title !== frontmatter.title)
+  .slice(0, 2);
+---
+
+<BaseLayout>
+  <section
+    class="relative lg:h-[calc(100vh-9rem)] w-full overflow-hidden lg:p-8 bg-white"
+  >
+    <div class="absolute inset-0 overflow-hidden lg:m-4 lg:rounded-3xl">
+      <Image
+        src={carFront}
+        alt="Service Package Background"
+        class="object-cover object-center size-full"
+        width={1920}
+        height={1080}
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+      >
+      </div>
+    </div>
+    <Wrapper
+      variant="standard"
+      class="relative z-10 flex flex-col justify-center h-full pt-32 pb-12"
+    >
+      <div class="max-w-4xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium tracking-widest text-white uppercase border-l font-display border-accent-500"
+        >
+          Service Package
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 text-white uppercase font-display"
+        >
+          {frontmatter.title}
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-2xl mt-4 text-white">
+          {frontmatter.description}
+        </Text>
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Text
+          tag="h3"
+          variant="textLG"
+          class="pl-4 font-medium text-white uppercase border-l-2 font-display border-accent-500"
+        >
+          Duration:
+          {frontmatter.duration}
+        </Text>
+        <Text
+          tag="h3"
+          variant="textLG"
+          class="pl-4 font-medium text-white uppercase border-l-2 font-display border-accent-500"
+        >
+          Package Price:
+          {frontmatter.price}
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <div class="relative pl-4 border-l-2 border-accent-500">
+            <Text
+              tag="h3"
+              variant="textBase"
+              class="font-bold tracking-wide uppercase text-base-900"
+            >
+              Package Details
+            </Text>
+          </div>
+          <Wrapper variant="prose" class="mt-8">
+            <slot />
+          </Wrapper>
+        </div>
+        <div class="lg:col-span-1">
+          <aside class="lg:sticky lg:top-32">
+            <div
+              class="flex flex-col bg-white shadow-2xl rounded-3xl outline-4 outline-base-500/10 divide-y divide-base-500/10"
+            >
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textBase"
+                  class="pl-4 font-bold tracking-wide uppercase border-l-2 text-base-900 border-accent-500"
+                >
+                  Included Services
+                </Text>
+                <div class="mt-8 space-y-2">
+                  {
+                    frontmatter.includedServices.map((service) => (
+                      <div class="flex items-center gap-2">
+                        <Check size="xs" />
+                        <span class="text-sm font-medium capitalize text-base-600">
+                          {service.replace(/-/g, " ")}
+                        </span>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium uppercase font-display text-base-900"
+                >
+                  Book this package
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Schedule your appointment today.
+                </Text>
+                <Button
+                  href="/book-appointment"
+                  variant="default"
+                  size="xs"
+                  class="mt-12 w-fit"
+                >
+                  Schedule Now
+                </Button>
+              </div>
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium uppercase font-display text-base-900"
+                >
+                  Questions?
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Our team is here to help.
+                </Text>
+                <Button
+                  href="/contact"
+                  variant="muted"
+                  size="xs"
+                  class="mt-12 w-fit"
+                >
+                  Contact us
+                </Button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  {
+    relatedPackages.length > 0 && (
+      <section class="bg-gradient-to-b from-base-200 to-white">
+        <Wrapper variant="standard" class="py-12 lg:py-24">
+          <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end">
+            <div class="lg:col-span-2">
+              <Text
+                tag="h2"
+                variant="displayXL"
+                class="mt-8 uppercase font-display text-base-900"
+              >
+                Other Packages
+              </Text>
+              <Text tag="p" variant="textBase" class="mt-2 text-base-500">
+                Explore more maintenance packages for your vehicle
+              </Text>
+            </div>
+            <Button
+              isLink
+              href="/packages"
+              variant="muted"
+              size="sm"
+              class="w-fit lg:mt-auto lg:ml-auto"
+            >
+              View All Packages
+            </Button>
+          </div>
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2  gap-4">
+            {relatedPackages.map((pkg) => (
+              <PackageCard package={pkg} />
+            ))}
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import PackageCard from "@/components/packages/PackageCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPackages = await getCollection("packages");
+const packages = allPackages.filter((pkg) => pkg.data.isFeatured);
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-y-8">
+      <div class="lg:col-span-2">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Packages
+        </Text>
+        <Text
+          tag="h2"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          Comprehensive Care Packages
+        </Text>
+      </div>
+      <Button
+        isLink
+        href="/packages"
+        variant="muted"
+        size="sm"
+        class="w-fit lg:mt-auto lg:ml-auto"
+      >
+        View All Packages
+      </Button>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {packages.map((pkg) => <PackageCard package={pkg} />)}
+    </div>
+  </Wrapper>
+</section>

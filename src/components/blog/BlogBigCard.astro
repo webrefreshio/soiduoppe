@@ -1,0 +1,70 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Content
+const { post } = Astro.props;
+const url = "/blog/posts/" + post.slug;
+---
+
+<article
+  class="relative p-8 overflow-hidden shadow-2xl rounded-3xl bg-base-900 lg:p-20 outline-4 outline-base-500/10"
+>
+  <Image
+    src={post.data.image.url}
+    alt={post.data.image.alt}
+    class="absolute inset-0 object-cover size-full"
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+  >
+  </div>
+  <div
+    class="relative items-end grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
+  >
+    <div>
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium text-white uppercase border-l font-display border-accent-500"
+      >
+        Featured Article
+      </Text>
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="mt-12 text-white uppercase font-display"
+      >
+        {post.data.title}
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-300">
+        {post.data.description}
+      </Text>
+      <div class="mt-6">
+        <Text tag="p" variant="textSM" class="text-white/70">
+          Published{" "}
+          {
+            new Date(post.data.pubDate).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </Text>
+      </div>
+    </div>
+
+    <Button
+      isLink
+      size="xs"
+      variant="muted"
+      class=" w-fit lg:ml-auto"
+      href={url}
+    >
+      Read Full Article
+    </Button>
+  </div>
+</article>

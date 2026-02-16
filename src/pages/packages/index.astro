@@ -1,0 +1,75 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import carBack from "@/images/assets/carBack.jpg";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import PackageCard from "@/components/packages/PackageCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPackages = await getCollection("packages");
+---
+
+<BaseLayout>
+  <section
+    class="relative lg:h-[calc(100vh-9rem)] w-full overflow-hidden lg:p-8 bg-white"
+  >
+    <div class="absolute inset-0 overflow-hidden lg:m-4 lg:rounded-3xl">
+      <Image
+        src={carBack}
+        alt="Car service background"
+        class="object-cover size-full"
+        width={1920}
+        height={1080}
+        class="object-cover object-center size-full"
+      />
+
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+      >
+      </div>
+    </div>
+    <Wrapper
+      variant="standard"
+      class="relative z-10 flex flex-col justify-start h-full pt-32 pb-12"
+    >
+      <div class="max-w-xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium text-white uppercase border-l font-display border-accent-600"
+        >
+          Our Service Packages
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="mt-8 text-white uppercase font-display text-balance"
+        >
+          Comprehensive Care for Your Vehicle
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-300 text-balance"
+        >
+          Choose from our tailored maintenance packages designed to keep your
+          vehicle running at its peak performance. Transparent pricing, expert
+          service.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {allPackages.map((pkg) => <PackageCard package={pkg} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

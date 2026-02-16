@@ -1,0 +1,88 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+// Content
+const {
+  url,
+  name,
+  type,
+  location,
+  serviceUsed,
+  vehicle,
+  quote,
+  imageUrl,
+  imageAlt,
+} = {
+  url: "/customers/" + Astro.props.customer.slug,
+  name: Astro.props.customer.data.name,
+  type: Astro.props.customer.data.type ?? "Customer",
+  location: Astro.props.customer.data.location,
+  serviceUsed: Astro.props.customer.data.serviceUsed,
+  vehicle: Astro.props.customer.data.vehicle,
+  quote: Astro.props.customer.data.quote,
+  imageUrl: Astro.props.customer.data.image?.url,
+  imageAlt:
+    Astro.props.customer.data.image?.alt ||
+    `Portrait of ${Astro.props.customer.data.name || "customer"}`,
+};
+---
+
+<article
+  class="relative overflow-hidden rounded-3xl bg-white outline-4 outline-base-500/10 shadow-2xl grid grid-cols-1 lg:grid-cols-2"
+>
+  <a
+    href={url}
+    aria-label={`Read customer story: ${name}`}
+    class="absolute inset-0 z-30"></a>
+  <div class="relative oveflow-hidden aspect-square">
+    <Image
+      src={imageUrl}
+      alt={imageAlt}
+      width={1200}
+      height={900}
+      class="size-full object-cover"
+    />
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+    >
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-8 lg:gap-12 items-end p-8 lg:p-12"
+  >
+    <div class="space-y-4 text-center">
+      <Text
+        tag="h3"
+        variant="textSM"
+        class="pl-4 font-medium text-base-900 uppercase border-l font-display border-accent-500 w-fit mx-auto"
+      >
+        {name}
+      </Text>
+      <Text
+        tag="p"
+        variant="displaySM"
+        class="text-base-600 font-display text-balance mt-8"
+      >
+        “{quote.trim()}”
+      </Text>
+      <div
+        class="flex flex-wrap gap-3 justify-center text-base-600 text-xs uppercase font-display"
+      >
+        <span>
+          {vehicle}
+        </span>
+        <span class="text-base-900 pointer-event-none" aria-hidden="true">— </span>
+        <span>
+          {location}
+        </span>
+      </div>
+    </div>
+    <Button isLink size="xs" variant="muted" class="w-fit m-auto" href={url}>
+      Read story
+    </Button>
+  </div>
+</article>

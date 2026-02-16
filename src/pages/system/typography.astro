@@ -1,0 +1,80 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="lg:pt-32 pt-24 pb-12">
+      <Text
+        tag="h1"
+        class="font-display uppercase font-medium" variant="displayXL"
+        class="uppercase font-display text-base-900 text-balance"
+      >
+        Typography
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-600 text-balance">
+        Stack Sans Notch &amp; Inter
+      </Text>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <Text tag="h1" variant="textBase" class="font-medium text-base-900"
+        >Typography - Hanken Grotesk
+      </Text>
+
+      <div
+        class="flex flex-col mt-4 font-medium text-base-900 divide-y divide-base-300"
+      >
+        <div class="py-4">
+          <Text tag="p" variant="textXS"> Text XS </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" variant="textSM"> Text SM </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" variant="textBase"> Text Base </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" variant="textLG"> Text LG </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" variant="textXL"> Text XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="displayXS"> Display XS </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="displaySM"> Display SM </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="displayMD"> Display MD </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="displayLG"> Display LG </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="displayXL"> Display XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="display2XL"> Display 2XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="display3XL"> Display 3XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="display4XL"> Display 4XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="display5XL"> Display 5XL </Text>
+        </div>
+        <div class="py-4">
+          <Text tag="p" class="font-display uppercase font-medium" variant="display6XL"> Display 6XL </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

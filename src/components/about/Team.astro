@@ -1,0 +1,49 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import TeamCard from "@/components/team/TeamCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const team = await getCollection("team");
+// Limit to 4 members for the about page preview, or show all if appropriate.
+// The user said "Pull from your team collection".
+const featuredTeam = team.slice(0, 2);
+---
+
+<section class="bg-base-50">
+  <Wrapper variant="standard" class="py-24">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+      <div class="max-w-2xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          The Team
+        </Text>
+        <Text
+          tag="h2"
+          variant="displayXL"
+          class="uppercase font-display text-base-900 mt-8"
+        >
+          Social Proof in Human Form
+        </Text>
+        <Text tag="p" variant="textLG" class="mt-2 text-base-500 text-balance">
+          People trust people, not logos. Meet the experts behind our work.
+        </Text>
+      </div>
+      <a
+        href="/team"
+        class="text-base-900 font-medium hover:text-accent-500 transition-colors"
+      >
+        Meet the whole team &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+      {featuredTeam.map((member) => <TeamCard post={member} />)}
+    </div>
+  </Wrapper>
+</section>

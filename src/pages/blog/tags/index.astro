@@ -1,0 +1,116 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const tagMap = new Map();
+const pageTitle = "Tag Index";
+
+const normalizeTag = (tag: string) => {
+  const raw = (tag ?? "").toString().trim();
+  const slugSource = raw
+    .toLowerCase()
+    .replace(/^#+/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const slug = encodeURIComponent(slugSource || "tag");
+  const label =
+    raw.replace(/^#+/, "").replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim() ||
+    "Tag";
+  return { label, slug };
+};
+
+for (const post of allPosts) {
+  const tags = post.data.tags ?? [];
+  for (const tag of tags) {
+    const { label, slug } = normalizeTag(tag);
+    if (!tagMap.has(slug)) {
+      tagMap.set(slug, {
+        label,
+        slug,
+        count: 0,
+      });
+    }
+    const entry = tagMap.get(slug);
+    entry.count += 1;
+  }
+}
+
+const tags = Array.from(tagMap.values()).sort((a, b) =>
+  a.label.localeCompare(b.label)
+);
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="lg:pt-32 pt-24 pb-12">
+      <div class="max-w-4xl mx-auto text-center">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="text-base-900 font-display border-accent-500 pl-4 font-medium uppercase border-l"
+        >
+          Browse by topic
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="font-display text-base-900 mt-8 uppercase"
+        >
+          Tag directory
+        </Text>
+        <Text tag="p" variant="textBase" class="text-base-600 mt-4">
+          Jump into the subjects you care about most — maintenance, safety,
+          detailing, and more.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="divide-y divide-base-200 border-y border-base-200">
+        {
+          tags.map((tag) => (
+            <article class="flex flex-col lg:flex-row lg:items-end justify-between h-full py-8 group gap-x-12 gap-y-8">
+              <div class="border-accent-500 pl-4 border-l">
+                <Text
+                  tag="h3"
+                  variant="textBase"
+                  class="font-medium uppercase font-display text-base-900  "
+                >
+                  {tag.label}
+                </Text>
+                <Text
+                  tag="span"
+                  variant="textXS"
+                  class="text-base-600 uppercase flex items-center gap-1 mt-1"
+                >
+                  <span>
+                    <span>{tag.count}</span>
+                    <span>{tag.count === 1 ? "post" : "posts"}</span>
+                  </span>
+                </Text>
+              </div>
+
+              <Button
+                isLink
+                size="xs"
+                variant="muted"
+                href={`/blog/tags/${tag.slug}`}
+                class="w-fit lg:mt-auto"
+                aria-label="Read more about this topic"
+                title="Read more about this topic"
+              >
+                View Position
+              </Button>
+            </article>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

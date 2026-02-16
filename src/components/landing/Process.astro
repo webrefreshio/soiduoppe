@@ -1,0 +1,102 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const steps = [
+  {
+    title: "Schedule",
+    description: "Book online or call us. We'll prepare for your arrival.",
+  },
+  {
+    title: "Diagnose",
+    description:
+      "Comprehensive inspection and transparent quote before work begins.",
+  },
+  {
+    title: "Repair",
+    description: "Expert service using premium parts and factory-grade tools.",
+  },
+  {
+    title: "Drive",
+    description: "Final quality check and you're back on the road safely.",
+  },
+];
+---
+
+<section class="bg-gradient-to-b from-base-200 to-white">
+  <Wrapper variant="standard" class="py-20 lg:py-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div>
+        <div
+          class="lg:sticky lg:top-24 relative overflow-hidden lg:h-[calc(100vh-9rem)] rounded-3xl"
+        >
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="absolute object-cover size-full"
+          >
+            <source src="/videos/car3.mp4" type="video/mp4" />
+          </video>
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+          >
+          </div>
+          <div class="relative z-10 p-8">
+            <Text
+              tag="span"
+              variant="textSM"
+              class="pl-4 font-medium text-white uppercase border-l font-display border-accent-500"
+            >
+              Our Process
+            </Text>
+            <Text
+              tag="h2"
+              variant="displayMD"
+              class="mt-8 text-white uppercase font-display"
+            >
+              Fast, Reliable <br /> Service Workflow
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="mt-4 text-base-300 text-balance"
+            >
+              Every stage is designed to get you back on the road quickly with a
+              smooth, safe, and hassle-free experience.
+            </Text>
+          </div>
+        </div>
+      </div>
+      <div class=" space-y-4">
+        {
+          steps.map((step, index) => (
+            <div class="relative flex flex-col p-6 overflow-hidden shadow-2xl  pt-42 bg-base-50 rounded-3xl shadow2xl outline-4 outline-base-500/10">
+              <span class="absolute -bottom-8 lg:-bottom-14 -right-4 text-[12rem] lg:text-[18rem] font-display font-bold text-base-500/10 select-none leading-none z-0 transition-colors duration-500 ">
+                {index + 1}
+              </span>
+              <div class="relative z-10">
+                <Text
+                  tag="h3"
+                  variant="textXL"
+                  class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500 "
+                >
+                  {step.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textLG"
+                  class="mt-4 text-base-500 text-balance"
+                >
+                  {step.description}
+                </Text>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

@@ -1,0 +1,71 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const principles = [
+  {
+    title: "Transparency in pricing",
+    description:
+      "No hidden fees or surprise bills. We explain every cost before we start work.",
+  },
+  {
+    title: "Preventive maintenance",
+    description:
+      "We focus on catching issues early to save you money and trouble down the road.",
+  },
+  {
+    title: "Clear communication",
+    description:
+      "We speak plain English, not mechanic jargon. You'll know exactly what's happening.",
+  },
+  {
+    title: "Workmanship",
+    description:
+      "We use OEM or high-quality aftermarket parts and stand behind our work.",
+  },
+];
+---
+
+<section class="bg-gradient-to-t from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24">
+    <div class="max-w-3xl">
+      <div>
+        <Text
+          tag="h2"
+          variant="displayXL"
+          class="uppercase font-display text-base-900"
+        >
+          How we work
+        </Text>
+        <Text tag="p" variant="textLG" class="mt-2 text-base-500 text-balance">
+          We believe in a proactive approach to vehicle care. It's not just
+          about fixing what's broken; it's about maintaining reliability and
+          safety for the long haul.
+        </Text>
+      </div>
+    </div>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        principles.map((item) => (
+          <div class="flex flex-col p-6 shadow-2xl pt-42 bg-base-50 rounded-3xl outline-4 outline-base-500/10">
+            <Text
+              tag="h3"
+              variant="textBase"
+              class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500 "
+            >
+              {item.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textXS"
+              class="mt-4 text-base-600 text-balance"
+            >
+              {item.description}
+            </Text>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

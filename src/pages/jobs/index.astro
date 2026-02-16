@@ -1,0 +1,57 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+// Components
+import JobCard from "@/components/jobs/JobCard.astro";
+
+// Content
+import { getCollection } from "astro:content";
+const allJobs = await getCollection("jobs");
+
+// Sort by date (newest first)
+allJobs.sort((a, b) => {
+  return (
+    new Date(b.data.postedDate).getTime() -
+    new Date(a.data.postedDate).getTime()
+  );
+});
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="max-w-3xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Careers
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900 text-balance"
+        >
+          Join the Copperlane Team
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-600 text-balance">
+          We're always looking for talented individuals who share our passion
+          for automotive excellence and customer service. Explore our current
+          openings below.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="divide-y divide-base-200 border-y border-base-200">
+        {allJobs.map((job) => <JobCard job={job} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

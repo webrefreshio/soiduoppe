@@ -1,0 +1,144 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="grid items-center gap-12 lg:grid-cols-2">
+        <div class="space-y-6">
+          <Text
+            tag="span"
+            variant="textSM"
+            class="inline-flex items-center gap-3 pl-4 font-medium uppercase border-l font-display text-base-900 border-accent-500"
+          >
+            Error 404
+            <span class="text-base-500">Page not found</span>
+          </Text>
+
+          <Text
+            tag="h1"
+            variant="displayLG"
+            class="font-display text-base-900 leading-tight"
+          >
+            We can't find that page, but we've got you covered.
+          </Text>
+
+          <Text tag="p" variant="textBase" class="text-base-600 max-w-xl">
+            The link you followed may be broken or the page may have moved. Try
+            one of the quick paths below or head back home.
+          </Text>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <Button isLink={true} href="/" size="md" variant="default">
+              Back to homepage
+            </Button>
+
+            <Button isLink={true} href="/contact" size="md" variant="muted">
+              Contact us
+            </Button>
+          </div>
+
+          <div class="flex items-center gap-3 text-sm text-base-600">
+            <span
+              class="inline-flex size-8 items-center justify-center rounded-full bg-base-900 text-white font-display text-xs"
+            >
+              ?
+            </span>
+            <div>
+              <p class="font-medium text-base-900">Need help right now?</p>
+              <a
+                href="tel:+1-555-123-4567"
+                class="text-base-900 hover:text-accent-600 transition-colors"
+              >
+                Call our team • (555) 123-4567
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-4 lg:gap-6">
+          <div
+            class="shadow-2xl bg-base-50 rounded-3xl outline-4 outline-base-500/10 divide-y divide-base-200"
+          >
+            <div class="p-6">
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="uppercase font-display font-medium text-base-900"
+              >
+                Popular links
+              </Text>
+              <ul class="mt-3 space-y-2 text-base-900">
+                <li>
+                  <a
+                    href="/book-appointment"
+                    class="text-base-900 hover:text-accent-600 text-xs font-semibold tracking-wide uppercase"
+                  >
+                    Book an appointment
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/packages"
+                    class="text-base-900 hover:text-accent-600 text-xs font-semibold uppercase tracking-wide"
+                  >
+                    View service packages
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/customers"
+                    class="text-base-900 hover:text-accent-600 text-xs font-semibold uppercase tracking-wide"
+                  >
+                    Read customer stories
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-6">
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="uppercase font-display font-medium text-base-900"
+              >
+                Still lost?
+              </Text>
+              <Text
+                tag="p"
+                variant="textSM"
+                class="mt-2 text-base-600 text-balance"
+              >
+                Try the search in the bottom-right corner or send us a note and
+                we'll point you in the right direction.
+              </Text>
+              <div class="mt-8 flex items-center gap-2">
+                <a
+                  href="mailto:hello@copperlane.com"
+                  class="text-accent-600 hover:text-base-900 text-sm font-semibold"
+                >
+                  hello@copperlane.com
+                </a>
+                <span
+                  aria-hidden="true"
+                  class="text-base-400 pointer-events-none">—</span
+                >
+                <a
+                  href="/faq"
+                  class="text-accent-600 hover:text-base-900 text-sm font-semibold"
+                >
+                  FAQ
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

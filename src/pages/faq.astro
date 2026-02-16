@@ -1,0 +1,211 @@
+---
+// Foundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Plus from "@/components/fundations/icons/Plus.astro";
+// FAQ Data organized by categories
+const faqCategories = [
+  {
+    category: "Booking & Appointments",
+    questions: [
+      {
+        question: "Do I need an appointment, or can I walk in?",
+        answer:
+          "Appointments are recommended to ensure prompt service, but walk-ins are welcome depending on availability. For inspections, diagnostics, and larger repairs, scheduling ahead allows us to allocate the right technician and minimize wait times. You can request an appointment online or contact us directly by phone.",
+      },
+      {
+        question: "How long does a typical service take?",
+        answer:
+          "Service duration depends on the type of work and your vehicle model. Basic services like oil changes typically take 20–30 minutes, while more involved repairs or packages may take several hours. We'll always provide a time estimate before starting any work.",
+      },
+      {
+        question: "Can I wait while my car is being serviced?",
+        answer:
+          "Yes, we have a comfortable waiting area with complimentary Wi-Fi, coffee, and refreshments. For longer services, we can also arrange a shuttle or help coordinate alternative transportation.",
+      },
+      {
+        question: "How do I reschedule my appointment?",
+        answer:
+          "You can reschedule your appointment by calling us directly or using our online booking system. We appreciate at least 24 hours notice when possible, so we can accommodate other customers.",
+      },
+    ],
+  },
+  {
+    category: "Maintenance & Repairs",
+    questions: [
+      {
+        question: "How often should I service my vehicle?",
+        answer:
+          "Service intervals depend on your vehicle, driving habits, and manufacturer recommendations. As a general guideline, oil changes are typically recommended every 5,000–10,000 miles, while major inspections occur at higher mileage milestones. Our technicians can advise you based on your specific vehicle and usage.",
+      },
+      {
+        question: "What should I do if a warning light turns on?",
+        answer:
+          "Warning lights indicate that your vehicle's onboard system has detected an issue. Some lights require immediate attention, while others may signal routine maintenance needs. We recommend scheduling a diagnostic check as soon as possible to prevent further damage.",
+      },
+      {
+        question: "Do you work on all makes and models?",
+        answer:
+          "Yes, our technicians are trained and equipped to service most domestic and foreign vehicles. Whether you drive a sedan, SUV, truck, or hybrid, we have the expertise and tools to keep your vehicle running smoothly.",
+      },
+      {
+        question: "What's included in a full vehicle inspection?",
+        answer:
+          "Our comprehensive inspection covers brakes, tires, suspension, steering, fluids, belts, hoses, battery, lights, and more. We provide a detailed report of our findings along with recommendations for any necessary repairs or maintenance.",
+      },
+    ],
+  },
+  {
+    category: "Pricing & Estimates",
+    questions: [
+      {
+        question: "What does 'price from' mean?",
+        answer:
+          '"Price from" indicates a starting cost for a service under standard conditions. Final pricing may vary depending on your vehicle\'s make, model, condition, and required parts. You will always receive a clear estimate and approve the cost before any work begins.',
+      },
+      {
+        question: "Do you charge for diagnostics?",
+        answer:
+          "Diagnostic fees cover the time and tools required to accurately identify an issue. In many cases, diagnostic fees may be waived or credited if you proceed with the recommended repair. Our team will explain any diagnostic costs upfront.",
+      },
+      {
+        question: "Can I get an estimate before bringing my car in?",
+        answer:
+          "We can provide a general estimate over the phone or online for common services. However, for accurate pricing on repairs, we recommend bringing your vehicle in for a proper inspection, as costs can vary based on the specific issue and your vehicle's condition.",
+      },
+      {
+        question: "Do you offer any discounts or promotions?",
+        answer:
+          "Yes, we regularly offer seasonal promotions and package deals. We also provide discounts for first-time customers, seniors, military personnel, and fleet accounts. Check our website or ask our staff about current offers.",
+      },
+    ],
+  },
+  {
+    category: "Warranty & Parts",
+    questions: [
+      {
+        question: "Do you offer warranty on repairs?",
+        answer:
+          "Yes. Most repairs come with a warranty covering both labor and parts. Warranty terms may vary depending on the service performed and components used. Please contact us for specific warranty details related to your repair.",
+      },
+      {
+        question: "Can I bring my own parts?",
+        answer:
+          "In some cases, customer-supplied parts may be accepted. However, we cannot guarantee the quality, fitment, or warranty of externally sourced components. Using shop-supplied parts allows us to ensure proper installation and warranty coverage.",
+      },
+      {
+        question: "What brands of parts do you use?",
+        answer:
+          "We use OEM (Original Equipment Manufacturer) parts or high-quality aftermarket alternatives that meet or exceed manufacturer specifications. We can discuss part options and pricing before any work begins.",
+      },
+      {
+        question: "What if a repair doesn't fix the problem?",
+        answer:
+          "If a repair we performed doesn't resolve the issue, bring your vehicle back and we'll diagnose the problem at no additional charge. If we made an error, we'll correct it under our warranty. Your satisfaction and safety are our priorities.",
+      },
+    ],
+  },
+  {
+    category: "Shop Policies",
+    questions: [
+      {
+        question: "What payment methods do you accept?",
+        answer:
+          "We accept major credit cards, debit cards, and other approved payment methods. Payment is due upon completion of service unless otherwise agreed in advance. Please contact us if you have specific payment-related questions.",
+      },
+      {
+        question: "What is your cancellation policy?",
+        answer:
+          "We ask that appointment cancellations or reschedules be made as early as possible. This helps us accommodate other customers and manage technician availability. Late cancellations may be subject to a fee depending on the service booked.",
+      },
+      {
+        question: "Do you offer financing options?",
+        answer:
+          "Yes, we offer financing options for larger repairs through approved partners. This allows you to spread the cost of necessary repairs over time. Ask our service advisors about available financing plans and eligibility requirements.",
+      },
+      {
+        question: "What are your hours of operation?",
+        answer:
+          "We're open Monday through Friday from 7:30 AM to 6:00 PM, and Saturday from 8:00 AM to 4:00 PM. We're closed on Sundays and major holidays. Early drop-off is available for your convenience.",
+      },
+    ],
+  },
+];
+---
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="max-w-3xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Support
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900 text-balance"
+        >
+          Frequently Asked Questions
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          Find answers to common questions about our services, pricing, and
+          policies.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="space-y-24 gap-8 lg:gap-1 divide-y divide-base-200">
+        {
+          faqCategories.map((cat) => (
+            <div class="pb-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <Text
+                tag="h3"
+                variant="textBase"
+                class="pl-4 uppercase border-l font-display text-base-900  border-accent-500 h-fit lg:sticky lg:top-24"
+              >
+                {cat.category}
+              </Text>
+              <div class="space-y-2 lg:col-span-2 ">
+                {cat.questions.map((faq) => (
+                  <details class="py-4 select-none group">
+                    <summary class="flex items-center  gap-4 justify-between cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                      <Text
+                        tag="span"
+                        variant="textBase"
+                        class="font-medium text-base-900 "
+                      >
+                        {faq.question}
+                      </Text>
+                      <span class="flex items-center justify-center rounded-full shrink-0 size-8 bg-base-200 group-open:bg-accent-500 transition-colors">
+                        <Plus
+                          size="sm"
+                          class="text-base-600 group-open:text-white group-open:rotate-45 transition-transform duration-300"
+                        />
+                      </span>
+                    </summary>
+                    <div class="pt-4 pb-8">
+                      <Text tag="p" variant="textBase" class="text-base-600">
+                        {faq.answer}
+                      </Text>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

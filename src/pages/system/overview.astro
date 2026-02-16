@@ -1,0 +1,170 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const pageSections = [
+  {
+    title: "Static",
+    columns: [
+      {
+        category: " Pages",
+        links: [
+          { text: "Home", href: "/" },
+          { text: "FAQ", href: "/faq" },
+          { text: "About", href: "/about" },
+          { text: "404", href: "/404" },
+        ],
+      },
+      {
+        category: "Forms",
+        links: [
+          { text: "Apply", href: "/apply" },
+          { text: "Contact", href: "/contact" },
+          { text: "Book Appointment", href: "/book-appointment" },
+        ],
+      },
+      {
+        category: "System",
+        links: [
+          { text: "Colors", href: "/system/colors" },
+          { text: "Links", href: "/system/link" },
+          { text: "Buttons", href: "/system/buttons" },
+          { text: "Typography", href: "/system/typography" },
+        ],
+      },
+      {
+        category: "Resources",
+        links: [
+          { text: "Social", href: "https://x.com/lexingtonthemes" },
+          {
+            text: "License",
+            href: "https://lexingtonthemes.com/legal/license",
+          },
+          {
+            text: "Documentation",
+            href: "https://lexingtonthemes.com/documentation/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Content Collections",
+    columns: [
+      {
+        category: "Customers",
+        links: [
+          { text: "Home ", href: "/customers/" },
+          { text: "Details", href: "/customers/anthony-smith" },
+        ],
+      },
+      {
+        category: "Jobs",
+        links: [
+          { text: "Home ", href: "/jobs/" },
+          { text: "Details", href: "/jobs/customer-service-rep" },
+        ],
+      },
+      {
+        category: "Packages",
+        links: [
+          { text: "Home ", href: "/packages/" },
+          { text: "Details", href: "/packages/full-detailing-deluxe" },
+        ],
+      },
+      {
+        category: "Services",
+        links: [
+          { text: "Home ", href: "/services/" },
+          { text: "Details", href: "/services/full-detailing-deluxe" },
+        ],
+      },
+      {
+        category: "Blog Pages",
+        links: [
+          { text: "Home ", href: "/blog/" },
+          { text: "Post", href: "/blog/posts/1" },
+          { text: "Tag Index", href: "/blog/tags" },
+          { text: "Tag Category", href: "/blog/tags/car-care" },
+          { text: "RSS", href: "/rss.xml" },
+        ],
+      },
+      {
+        category: "Team",
+        links: [
+          { text: "Home", href: "/team/" },
+          { text: "Details", href: "/team/marcus-reed" },
+        ],
+      },
+      {
+        category: "Legal",
+        links: [
+          { text: "Terms Of Use", href: "/legal/terms" },
+          { text: "Privacy Policy", href: "/legal/privacy" },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="lg:pt-32 pt-24 pb-12">
+      <Text
+        tag="h1"
+        variant="displayXL"
+        class="uppercase font-display text-base-900 text-balance"
+      >
+        Overview
+      </Text>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap--x-8 gap-y-24">
+        {
+          pageSections.map((section) => (
+            <div>
+              <Text
+                tag="h3"
+                variant="textSM"
+                class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+              >
+                {section.title}
+              </Text>
+              <div class="mt-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4  gap-y-12">
+                {section.columns.map((column) => (
+                  <div>
+                    <Text
+                      tag="p"
+                      variant="textBase"
+                      class="font-medium text-base-900"
+                    >
+                      {column.category}
+                    </Text>
+                    <ul role="list" class="mt-2 ">
+                      {column.links.map((link) => (
+                        <li>
+                          <Text
+                            tag="a"
+                            variant="textSM"
+                            href={link.href}
+                            class="text-base-500 hover:text-base-900 duration-300"
+                          >
+                            {link.text}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

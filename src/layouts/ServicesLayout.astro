@@ -1,0 +1,192 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import ServiceCard from "@/components/services/ServiceCard.astro";
+import Why from "@/components/landing/Why.astro";
+const { frontmatter } = Astro.props;
+// Get related services
+import { getCollection } from "astro:content";
+const allServices = await getCollection("services");
+const relatedServices = allServices
+  .filter((service) => service.data.title !== frontmatter.title)
+  .slice(0, 2);
+---
+
+<BaseLayout ´>
+  <section
+    class="relative lg:h-[calc(100vh-9rem)] w-full overflow-hidden lg:p-8 bg-white"
+  >
+    <div class="absolute inset-0 overflow-hidden lg:m-4 lg:rounded-3xl">
+      <Image
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+        class="object-cover object-top size-full"
+        width={1920}
+        height={1080}
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+      >
+      </div>
+    </div>
+    <Wrapper
+      variant="standard"
+      class="relative z-10 flex flex-col justify-start h-full pt-32 pb-12"
+    >
+      <div class="max-w-4xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium tracking-widest text-white uppercase border-l font-display border-accent-500"
+        >
+          Professional Service
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 text-white uppercase font-display"
+        >
+          {frontmatter.title}
+        </Text>
+        <Text tag="p" variant="textBase" class="max-w-2xl mt-4 text-white">
+          {frontmatter.shortDescription}
+        </Text>
+      </div>
+      <div class="mt-4 space-y-4">
+        <Text tag="h3" variant="textBase" class="text-white uppercase">
+          <span class="font-medium"> Duration:</span>
+          {frontmatter.duration}
+        </Text>
+        <Text
+          tag="h3"
+          variant="textBase"
+          class="font-medium text-white uppercase"
+        >
+          <span class="font-medium">Starting at:</span>
+          {frontmatter.priceFrom}
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <div class="relative pl-4 border-l-2 border-accent-500">
+            <Text
+              tag="h2"
+              variant="textLG"
+              class=" font-bold tracking-wide uppercase text-base-900"
+            >
+              Service Details
+            </Text>
+          </div>
+          <div class="prose prose-invert prose-lg max-w-none mt-4">
+            <Text
+              tag="p"
+              variant="textBase"
+              class="leading-relaxed whitespace-pre-line text-base-500"
+            >
+              {frontmatter.description}
+            </Text>
+          </div>
+          <Wrapper variant="prose" class="mt-8">
+            <slot />
+          </Wrapper>
+        </div>
+        <div>
+          <aside class="lg:sticky lg:top-32">
+            <div
+              class="flex flex-col bg-white shadow-2xl rounded-3xl outline-4 outline-base-500/10 divide-y divide-base-500/10"
+            >
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium uppercase font-display text-base-900"
+                >
+                  Book this service
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Schedule your appointment today.
+                </Text>
+                <Button
+                  href="/book-appointment"
+                  variant="default"
+                  size="xs"
+                  class="mt-12 w-fit"
+                >
+                  Schedule Now
+                </Button>
+              </div>
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium uppercase font-display text-base-900"
+                >
+                  Questions?
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Our team is here to help.
+                </Text>
+                <Button
+                  href="/contact"
+                  variant="muted"
+                  size="xs"
+                  class="mt-12 w-fit"
+                >
+                  Contact us
+                </Button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  <Why />
+  {
+    relatedServices.length > 0 && (
+      <section class="bg-gradient-to-b from-base-200 to-white">
+        <Wrapper variant="standard" class="py-12 lg:py-24">
+          <div class="grid grid-cols-1 lg:grid-cols-3 lg:itmes-end">
+            <div class="lg:col-span-2">
+              <Text
+                tag="h2"
+                variant="displayXL"
+                class="mt-8 uppercase font-display text-base-900"
+              >
+                Other Services
+              </Text>
+              <Text tag="p" variant="textBase" class="mt-2 text-base-500">
+                Explore more ways we can help maintain your vehicle
+              </Text>
+            </div>
+            <Button
+              isLink
+              href="/services"
+              variant="muted"
+              size="sm"
+              class="w-fit lg:mt-auto lg:ml-auto"
+            >
+              View All Services
+            </Button>
+          </div>
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {relatedServices.map((service) => (
+              <ServiceCard service={service} />
+            ))}
+          </div>
+        </Wrapper>
+      </section>
+    )
+  }
+</BaseLayout>

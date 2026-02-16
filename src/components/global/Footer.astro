@@ -1,0 +1,167 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+import BigLogo from "@/components/assets/BigLogo.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+const footerLinks = [
+  {
+    title: "Services",
+    links: [
+      { label: "All Services", href: "/services" },
+      { label: "Service Packages", href: "/service-packages" },
+      { label: "Book Appointment", href: "/book-appointment" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Our Team", href: "/team" },
+      { label: "Careers", href: "/jobs" },
+      { label: "Contact", href: "/contact" },
+      { label: "FAQ", href: "/faq" },
+    ],
+  },
+];
+---
+
+<footer class="relative w-full overflow-hidden lg:p-8">
+  <div class="absolute inset-0 overflow-hidden lg:m-4 lg:rounded-3xl">
+    <video
+      class="object-cover object-center size-full"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src="/videos/car3.mp4" type="video/mp4" />
+    </video>
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 pointer-events-none bg-base-950/90"
+    >
+    </div>
+  </div>
+  <Wrapper
+    variant="standard"
+    class="relative z-10 flex flex-col justify-between h-full pt-24 pb-8 gap-8 lg:gap-44"
+  >
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-12">
+      <div class="col-span-2">
+        <a href="/" aria-label="Go to home page">
+          <Logo class="text-lg font-medium text-white uppercase font-display" />
+        </a>
+        <Text tag="p" variant="textXS" class="max-w-sm mt-12 text-base-500">
+          Copperlane offers premium automotive care with a focus on precision,
+          performance, and customer satisfaction. Your vehicle deserves the
+          best.
+        </Text>
+        <form class="max-w-sm mt-8">
+          <label for="email" class="sr-only">Subscribe to our newsletter</label>
+          <div class="flex gap-2">
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              class="w-full h-10 px-4 py-2 text-xs text-white border-transparent rounded-lg bg-white/5 focus:outline-none focus:border-accent-500 transition-colors placeholder:text-base-500"
+            />
+            <Button size="base" variant="accent" type="submit">
+              Subscribe
+            </Button>
+          </div>
+        </form>
+      </div>
+      {
+        footerLinks.map((section) => (
+          <div>
+            <Text
+              tag="h3"
+              variant="textSM"
+              class="font-medium text-white uppercase font-display"
+            >
+              {section.title}
+            </Text>
+            <ul class="mt-2 space-y-1">
+              {section.links.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="flex text-xs text-base-500 hover:text-white transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      <div
+        class="grid grid-cols-2 lg:grid-cols-1 gap-8 col-span-2 lg:col-span-1"
+      >
+        <div>
+          <Text
+            tag="h4"
+            variant="textSM"
+            class="font-medium text-white uppercase font-display"
+          >
+            Office
+          </Text>
+          <address
+            class="mt-2 text-xs not-italic leading-relaxed text-base-500"
+          >
+            123 Copperlane Ave<br />
+            New York, NY 10001
+          </address>
+        </div>
+        <div>
+          <Text
+            tag="h4"
+            variant="textSM"
+            class="font-medium text-white uppercase font-display"
+            >Opening Hours</Text
+          >
+          <Text
+            tag="p"
+            variant="textXS"
+            class="mt-2 leading-relaxed text-base-500"
+          >
+            <time datetime="09:00">Mon – Fri: 9am</time> – <time
+              datetime="18:00">6pm</time
+            ><br />
+            <time datetime="10:00">Sat: 10am</time> – <time datetime="16:00"
+              >4pm</time
+            >
+          </Text>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="flex flex-col justify-between mt-auto md:flex-row lg:items-center gap-4"
+      >
+        <Text tag="p" variant="textSM" class="text-base-500">
+          &copy; {new Date().getFullYear()} Copperlane. All rights reserved.
+        </Text>
+        <div class="flex gap-6">
+          {
+            ["Twitter", "Instagram", "LinkedIn", "Facebook"].map((social) => (
+              <a
+                href="#"
+                class="text-xs text-base-500 hover:text-accent-500 transition-colors"
+              >
+                {social}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <BigLogo
+        class="pt-8 mt-2 border-t text-white/10 border-white/10 mix-blend-multiply"
+      />
+    </div>
+  </Wrapper>
+</footer>

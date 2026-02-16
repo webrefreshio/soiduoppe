@@ -1,0 +1,202 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="pt-24 lg:pt-32 pb-12">
+      <div class="max-w-3xl">
+        <div class="lg:col-span-2">
+          <Text
+            tag="span"
+            variant="textSM"
+            class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+          >
+            {frontmatter.department}
+          </Text>
+          <Text
+            tag="h1"
+            variant="displayXL"
+            class="mt-8 uppercase font-display text-base-900 text-balance"
+          >
+            {frontmatter.title}
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="mt-4 text-base-600 text-balance"
+          >
+            {frontmatter.description}
+          </Text>
+          <div
+            class="flex flex-wrap items-center gap-4 text-sm text-base-600 mt-2 uppercase font-display"
+          >
+            <span>
+              {frontmatter.type}
+            </span>
+            <span>
+              {frontmatter.location}
+            </span>
+            <span>
+              {frontmatter.salary}
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 mt-12">
+          <Button
+            isLink
+            variant="default"
+            size="sm"
+            class="w-fit"
+            href={frontmatter.applyUrl || "mailto:#_"}
+          >
+            Email us
+          </Button>
+          <Button isLink variant="muted" size="sm" class="w-fit" href="/apply">
+            Apply for this Position
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24">
+        <Wrapper variant="prose" class="lg:col-span-2">
+          <div>
+            <h3>Responsibilities</h3>
+            <ul role="list">
+              {
+                frontmatter.responsibilities.map((item) => (
+                  <li class="text-base-600">
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <h3>Requirements</h3>
+            <ul>
+              {frontmatter.requirements.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </Wrapper>
+        <div class="lg:col-span-1">
+          <aside class="lg:sticky lg:top-32">
+            <div
+              class="flex flex-col bg-white shadow-2xl rounded-3xl outline-4 outline-base-500/10 divide-y divide-base-500/10"
+            >
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-display font-medium text-base-900 uppercas"
+                >
+                  Job Details
+                </Text>
+                <div class="space-y-4 mt-4">
+                  <div>
+                    <Text
+                      tag="h3"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Department
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      {frontmatter.department}
+                    </Text>
+                  </div>
+                  <div>
+                    <Text
+                      tag="h3"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Location
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      {frontmatter.location}
+                    </Text>
+                  </div>
+                  <div>
+                    <Text
+                      tag="h3"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Employment Type
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      {frontmatter.type}
+                    </Text>
+                  </div>
+                  <div>
+                    <Text
+                      tag="h3"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Posted Date
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      {
+                        new Date(frontmatter.postedDate).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )
+                      }
+                    </Text>
+                  </div>
+                </div>
+              </div>
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-display font-medium text-base-900 uppercase"
+                >
+                  Ready to apply?
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Send us your application today.
+                </Text>
+                <div class="flex flex-wrap items-center gap-2 mt-12">
+                  <Button
+                    isLink
+                    variant="default"
+                    size="sm"
+                    class="w-full lg:w-fit"
+                    href={frontmatter.applyUrl || "mailto:#_"}
+                  >
+                    Email us
+                  </Button>
+                  <Button
+                    isLink
+                    variant="muted"
+                    size="sm"
+                    class="w-full lg:w-fit"
+                    href="/apply"
+                  >
+                    Apply for this Position
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

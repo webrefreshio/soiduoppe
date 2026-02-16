@@ -1,0 +1,86 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+import BlogBigCard from "@/components/blog/BlogBigCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime();
+  const dateB = new Date(b.data.pubDate).getTime();
+  return dateB - dateA;
+});
+// Get featured post (marked as featured, or fallback to most recent)
+const featuredPost =
+  allPosts.find((post) => post.data.isFeatured) || allPosts[0];
+const otherPosts = allPosts.filter((post) => post.slug !== featuredPost.slug);
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="max-w-3xl mx-auto text-center">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Automotive Insights
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          Expert Advice for Vehicle Owners
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          Stay informed with the latest automotive tips, maintenance guides, and
+          industry insights to keep your vehicle running at its best.
+        </Text>
+      </div>
+      <div class="mt-12">
+        {featuredPost && <BlogBigCard post={featuredPost} />}
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12 lg:py-24">
+      <div class="max-w-3xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          All Articles
+        </Text>
+        <Text
+          tag="h2"
+          variant="displayLG"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          More Automotive Insights
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          Explore our collection of expert articles covering maintenance tips,
+          vehicle care guides, and the latest automotive trends.
+        </Text>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-12">
+        {otherPosts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

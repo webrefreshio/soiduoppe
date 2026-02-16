@@ -1,0 +1,240 @@
+---
+// Fundations
+import Button from "@/components/fundations/elements/Button.astro";
+// Icons
+import SearchIcon from "@/components/fundations/icons/Search.astro";
+import { getCollection } from "astro:content";
+const [posts, services, packages, customers, jobs, team, legal] =
+  await Promise.all([
+    getCollection("posts"),
+    getCollection("services"),
+    getCollection("packages"),
+    getCollection("customers"),
+    getCollection("jobs"),
+    getCollection("team"),
+    getCollection("legal"),
+  ]);
+
+const searchItems = [
+  ...posts.map((post) => ({
+    title: post.data.title,
+    description: post.data.description,
+    meta: new Date(post.data.pubDate).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
+    url: `/blog/posts/${post.slug}`,
+    type: "Article",
+  })),
+  ...services.map((service) => ({
+    title: service.data.title,
+    description:
+      service.data.shortDescription || service.data.description || "",
+    meta: service.data.category || "Service",
+    url: `/services/${service.slug}`,
+    type: "Service",
+  })),
+  ...packages.map((pack) => ({
+    title: pack.data.title,
+    description: pack.data.description,
+    meta: pack.data.price ? `Package • ${pack.data.price}` : "Package",
+    url: `/packages/${pack.slug}`,
+    type: "Package",
+  })),
+  ...customers.map((customer) => ({
+    title: customer.data.name,
+    description: customer.data.quote || "",
+    meta:
+      customer.data.serviceUsed ||
+      customer.data.vehicle ||
+      customer.data.location ||
+      "Customer Story",
+    url: `/customers/${customer.slug}`,
+    type: "Customer Story",
+  })),
+  ...jobs.map((job) => ({
+    title: job.data.title,
+    description: job.data.description || "",
+    meta: [job.data.location, job.data.type].filter(Boolean).join(" • "),
+    url: `/jobs/${job.slug}`,
+    type: "Job",
+  })),
+  ...team.map((person) => ({
+    title: person.data.name,
+    description: "",
+    meta: person.data.role || "Team",
+    url: `/team/${person.slug}`,
+    type: "Team",
+  })),
+  ...legal.map((page) => ({
+    title: page.data.page,
+    description: "",
+    meta: "Legal",
+    url: `/legal/${page.slug}`,
+    type: "Legal",
+  })),
+];
+---
+
+<div class="relative">
+  <Button
+    iconOnly
+    size="base"
+    variant="muted"
+    type="button"
+    id="searchButton"
+    aria-label="Search site"
+    class="fixed right-6 bottom-6 z-50"
+  >
+    <SearchIcon slot="icon" size="sm" />
+  </Button>
+</div>
+
+<div
+  id="searchModal"
+  class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/10 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="min-h-screen px-4 text-center">
+    <div
+      class="relative inline-block w-full max-w-xl mt-12 text-left align-middle lg:mt-48 transition-all transform"
+    >
+      <div
+        class="bg-white shadow-2xl outline-4 outline-base-500/5 outline-inset rounded-3xl p-6"
+      >
+        <div class="hidden">
+          <button
+            type="button"
+            id="closeSearch"
+            class="cursor-pointer text-base-400 hover:text-base-600"
+            aria-label="Close search"
+          >
+            close
+          </button>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search everything..."
+          class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+        />
+      </div>
+      <div
+        id="searchResults"
+        class="w-full mt-2 overflow-hidden overflow-y-auto rounded-l2xlg max-h-100 divide-y divide-base-200 scrollbar-hide bg-white shadow-2xl outline-4 outline-base-500/5 outline-inset rounded-3xl"
+      >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ searchItems }}>
+  window.addEventListener("load", () => {
+    const searchButton = document.getElementById("searchButton");
+    const searchModal = document.getElementById("searchModal");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+    const closeSearch = document.getElementById("closeSearch");
+
+    const fuse = new Fuse(searchItems, {
+      keys: ["title", "description", "meta", "type"],
+      threshold: 0.35,
+      includeMatches: true,
+    });
+
+    searchResults.classList.add("hidden");
+
+    function openSearch(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      searchModal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => searchInput.focus(), 100);
+    }
+
+    function closeSearchModal(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      searchModal.classList.add("hidden");
+      document.body.style.overflow = "";
+      searchInput.value = "";
+      searchResults.innerHTML = "";
+      searchResults.classList.add("hidden");
+    }
+
+    function renderResults(results) {
+      if (!searchInput.value.trim()) {
+        searchResults.innerHTML = "";
+        searchResults.classList.add("hidden");
+        return;
+      }
+
+      if (results.length === 0) {
+        searchResults.innerHTML = `
+          <div>
+            <h3 class="p-4 duration-300 hover:bg-white/80 backdrop-blur bg-white/90">
+              There's nothing here.
+            </h3>
+          </div>
+        `;
+        searchResults.classList.remove("hidden");
+        return;
+      }
+
+      searchResults.innerHTML = results
+        .map(({ item }) => {
+          const metaText = item.meta ? `<span>${item.meta}</span>` : "";
+          const description = item.description
+            ? `<p class="block text-xs text-base-600 mt-1">${item.description}</p>`
+            : "";
+
+          return `
+          <div class="relative block p-6 duration-300 hover:bg-white/80 backdrop-blur bg-white/90">
+            <a href="${item.url}" class="absolute inset-0 z-10"></a>
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-wide text-base-500">
+              <span class="px-2 py-1 rounded-full bg-base-100 text-base-700 font-semibold">${item.type}</span>
+              ${metaText}
+            </div>
+            <h3 class="block mt-2 text-sm font-medium text-base-900 ">
+              ${item.title}
+            </h3>
+            ${description}
+          </div>
+        `;
+        })
+        .join("");
+
+      searchResults.classList.remove("hidden");
+    }
+
+    searchButton.addEventListener("click", openSearch);
+    searchButton.addEventListener("touchend", openSearch);
+    closeSearch.addEventListener("click", closeSearchModal);
+    closeSearch.addEventListener("touchend", closeSearchModal);
+
+    searchInput.addEventListener("input", (e) => {
+      const value = e.target.value.trim();
+      const results = value ? fuse.search(value) : [];
+      renderResults(results);
+    });
+
+    // Close on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !searchModal.classList.contains("hidden")) {
+        closeSearchModal();
+      }
+    });
+
+    // NEW: Click outside modal content to close
+    searchModal.addEventListener("click", (e) => {
+      const modalContent = e.target.closest(".inline-block");
+      if (!modalContent) {
+        closeSearchModal(e);
+      }
+    });
+  });
+</script>

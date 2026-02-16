@@ -1,0 +1,63 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+// Content
+const { title, description, url, image, pubDate } = {
+  url: "/blog/posts/" + Astro.props.post.slug,
+  title: Astro.props.post.data.title,
+  description: Astro.props.post.data.description,
+  image: Astro.props.post.data.image.url,
+  pubDate: Astro.props.post.data.pubDate,
+};
+---
+
+<article
+  class="relative group overflow-hidden aspect-[4/3] rounded-3xl bg-base-900 outline-4 outline-base-500/10 shadow-2xl rounded-3xl"
+>
+  <a
+    href={url}
+    title={`Read more: ${title}`}
+    aria-label={`Read blog post: ${title}`}
+    class="absolute inset-0 z-30"></a>
+  <Image
+    src={image}
+    alt={title}
+    width={1000}
+    height={100}
+    class="absolute inset-0 object-cover size-full group-hover:scale-110 transition-transform duration-500"
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/80 via-base-900/70 to-base-900/90"
+  >
+  </div>
+  <div class="absolute inset-0 z-10 flex flex-col justify-start p-8">
+    <div class="relative">
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium text-white uppercase border-l font-display border-accent-500"
+      >
+        {
+          new Date(pubDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </Text>
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="mt-8 text-white uppercase font-display"
+      >
+        {title}
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-300 text-balance">
+        {description}
+      </Text>
+    </div>
+  </div>
+</article>

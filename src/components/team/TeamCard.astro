@@ -1,0 +1,63 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+const { url, name, image, role, bio } = {
+  url: "/team/" + Astro.props.post.slug,
+  name: Astro.props.post.data.name,
+  role: Astro.props.post.data.role,
+  image: Astro.props.post.data.image.url,
+  bio: Astro.props.post.data.bio,
+};
+---
+
+<article
+  class="relative group overflow-hidden aspect-[3/4] rounded-3xl bg-base-900 outline-4 outline-base-500/10 shadow-2xl"
+>
+  <a
+    href={url}
+    title={`View profile for ${name}`}
+    aria-label={`View profile for ${name}`}
+    class="absolute inset-0 z-30"></a>
+
+  <Image
+    width="1000"
+    height="1000"
+    src={image}
+    alt={name}
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+  />
+
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/80 via-base-900/70 to-base-900/90"
+  >
+  </div>
+
+  <div class="absolute inset-0 z-10 flex flex-col justify-start p-8">
+    <div class="relative">
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium text-white uppercase border-l font-display border-accent-500"
+      >
+        {role}
+      </Text>
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="mt-8 text-white uppercase font-display"
+      >
+        {name}
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="mt-4 text-base-300 text-balance line-clamp-3"
+      >
+        {bio}
+      </Text>
+    </div>
+  </div>
+</article>

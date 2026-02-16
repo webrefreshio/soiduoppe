@@ -1,0 +1,70 @@
+---
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const introSections = [
+  {
+    title: "Precision First",
+    description:
+      "Every diagnosis starts with data, not guesses. Our techs use calibrated tools and proven methods to pinpoint issues with ruthless accuracy.",
+  },
+  {
+    title: "Work That Holds Up",
+    description:
+      "Repairs are done with the long game in mind — quality parts, clean workmanship, and zero tolerance for shortcuts.",
+  },
+  {
+    title: "Straightforward Service",
+    description:
+      "We tell you what matters, what can wait, and what’s optional. Clear pricing, honest recommendations, and updates you don’t have to chase.",
+  },
+  {
+    title: "A Team That Gives a Damn",
+    description:
+      "Copperlane is built by people who take pride in doing the job right. Skill, accountability, and a genuine respect for every driver who trusts us.",
+  },
+];
+---
+
+<section class="bg-gradient-to-t from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24">
+    <div>
+      <Text
+        tag="h2"
+        variant="displayXL"
+        class="uppercase font-display text-base-900"
+      >
+        From a humble workshop to a trusted destination — Copperlane is built on
+        skill, grit, and genuine care for every driver we serve.
+      </Text>
+      <Text tag="p" variant="textLG" class="mt-2 text-base-500 text-balance">
+        Meet the people who keep Copperlane running — one repair, one rebuild,
+        one loyal customer at a time.
+      </Text>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        introSections.map((section) => (
+          <div class="p-6 shadow-2xl pt-42 bg-base-50 rounded-3xl outline-4 outline-base-500/10">
+            <Text
+              tag="h3"
+              variant="textBase"
+              class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500 "
+            >
+              {section.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textXS"
+              class="mt-4 text-base-600 text-balance"
+            >
+              {section.description}
+            </Text>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

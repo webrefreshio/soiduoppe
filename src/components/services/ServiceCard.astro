@@ -1,0 +1,66 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+const { title, description, url, price, duration, image } = {
+  url: "/services/" + Astro.props.service.slug,
+  title: Astro.props.service.data.title,
+  description: Astro.props.service.data.shortDescription,
+  price: Astro.props.service.data.priceFrom,
+  duration: Astro.props.service.data.duration,
+  image: Astro.props.service.data.image,
+};
+---
+
+<article
+  class="relative overflow-hidden group aspect-4/3 outline-4 outline-base-500/10 rounded-3xl"
+>
+  <a
+    href={url}
+    title={`View service: ${title}`}
+    aria-label={`View service: ${title}`}
+    class="absolute inset-0 z-30"></a>
+  <Image
+    src={image.url}
+    alt={image.alt}
+    class="absolute inset-0 object-cover size-full group-hover:scale-110 transition-transform duration-500"
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none bg-gradient-to-t from-base-950 via-base-950/60 to-transparent"
+  >
+  </div>
+
+  <div class="absolute inset-0 z-10 flex flex-col justify-end p-6">
+    <div class="relative">
+      <span
+        class="absolute -top-10 right-0 text-[110px] font-display font-bold text-white/5 select-none leading-none z-0 transition-colors duration-500 group-hover:text-white/15"
+      >
+        {price}
+      </span>
+      <Text
+        tag="h3"
+        variant="textLG"
+        class="pl-4 font-medium text-white uppercase border-l-2 font-display border-accent-500"
+      >
+        {title}
+      </Text>
+      <Text
+        tag="p"
+        variant="textBase"
+        class="mt-2 text-base-300 text-balance line-clamp-2"
+      >
+        {description}
+      </Text>
+    </div>
+
+    <Text
+      tag="p"
+      variant="textXS"
+      class="pt-4 mt-4 font-medium text-white border-t border-white/10"
+    >
+      <span> {duration}</span>
+    </Text>
+  </div>
+</article>

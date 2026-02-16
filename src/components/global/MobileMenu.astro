@@ -1,0 +1,95 @@
+---
+// Fundations
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const quickLinks = [
+  { href: "/services", label: "Services" },
+  { href: "/packages", label: "Packages" },
+  { href: "/customers", label: "Customers" },
+  { href: "/about", label: "About" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/system/overview", label: "Overview" },
+];
+---
+
+<div
+  id="mobile-menu"
+  class="absolute left-0 z-40 hidden w-full lg:hidden top-full"
+>
+  <Wrapper variant="standard">
+    <div
+      class="bg-white shadow-2xl outline-4 outline-base-500/5 outline-inset rounded-3xl"
+    >
+      <div class="space-y-4 p-6">
+        {
+          quickLinks.map((link) => (
+            <a
+              href={link.href}
+              class="block text-2xl font-medium text-base-900 hover:text-accent-600 transition-colors font-display uppercase"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <div class="p-6 space-y-2 border-t border-base-200">
+        <Button
+          islink
+          size="base"
+          variant="accent"
+          class="w-full"
+          href="/book-appointment"
+        >
+          Book Appointment
+        </Button>
+        <Button
+          islink
+          size="base"
+          variant="muted"
+          class="w-full"
+          href="/contact"
+        >
+          Contact us
+        </Button>
+      </div>
+    </div>
+  </Wrapper>
+</div>
+<script is:inline>
+  (function () {
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIconOpen = document.getElementById("menu-icon-open");
+    const menuIconClose = document.getElementById("menu-icon-close");
+    if (!mobileMenuButton || !mobileMenu) return;
+    let isMobileOpen = false;
+    mobileMenuButton.addEventListener("click", function (e) {
+      e.stopPropagation();
+      isMobileOpen = !isMobileOpen;
+      if (isMobileOpen) {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.style.display = "block"; // Force display
+        if (menuIconOpen) menuIconOpen.classList.add("hidden");
+        if (menuIconClose) menuIconClose.classList.remove("hidden");
+      } else {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.style.display = ""; // Reset display
+        if (menuIconOpen) menuIconOpen.classList.remove("hidden");
+        if (menuIconClose) menuIconClose.classList.add("hidden");
+      }
+      mobileMenuButton.setAttribute("aria-expanded", String(isMobileOpen));
+    });
+    // Close mobile menu when clicking a link
+    var links = mobileMenu.querySelectorAll("a");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("click", function () {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.style.display = ""; // Reset display
+        if (menuIconOpen) menuIconOpen.classList.remove("hidden");
+        if (menuIconClose) menuIconClose.classList.add("hidden");
+        isMobileOpen = false;
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+      });
+    }
+  })();
+</script>

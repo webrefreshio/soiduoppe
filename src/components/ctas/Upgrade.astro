@@ -1,0 +1,61 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import carBack from "@/images/assets/carBack.jpg";
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section class="bg-gradient-to-b from-base-200 to-white">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div
+      class="relative p-8 overflow-hidden shadow-2xl rounded-3xl bg-linear-45 from-accent-500 to-accent-600 lg:p-20 outline-4 outline-base-500/10"
+    >
+      <Image
+        src={carBack}
+        alt="Service Package Background"
+        class="absolute inset-0 object-cover size-full"
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+      >
+      </div>
+      <div
+        class="relative items-end grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16"
+      >
+        <div>
+          <Text
+            tag="span"
+            variant="textBase"
+            class="pl-4 font-medium text-white uppercase border-l border-white font-display"
+          >
+            Limited Time Offer
+          </Text>
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="mt-12 text-white uppercase font-display"
+          >
+            Upgrade to a Full Service Package
+          </Text>
+          <Text tag="p" variant="textBase" class="mt-4 text-base-300">
+            Save up to 20% when you bundle services together. Our comprehensive
+            packages include everything your vehicle needs to stay in peak
+            condition—all at one great price.
+          </Text>
+        </div>
+        <div class="flex flex-col sm:flex-row lg:justify-end gap-4">
+          <Button href="/packages" variant="accent" size="xs">
+            View Packages
+          </Button>
+          <Button href="/book-appointment" variant="muted" size="xs">
+            Book Now
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

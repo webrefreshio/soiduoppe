@@ -1,0 +1,45 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+const { title, department, location, type, url } = {
+  title: Astro.props.job.data.title,
+  department: Astro.props.job.data.department,
+  location: Astro.props.job.data.location,
+  type: Astro.props.job.data.type,
+  url: "/jobs/" + Astro.props.job.slug,
+};
+---
+<article
+  class="flex flex-col lg:flex-row lg:items-end justify-between h-full py-8 group gap-x-12 gap-y-8"
+>
+  <div>
+    <div class="pl-4 border-l-2 border-accent-500">
+      <Text tag="p" variant="textSM" class="uppercase font-medium font-display">
+        {department}
+      </Text>
+      <Text tag="p" variant="textXS" class="text-base-500">
+        {type}, {location}
+      </Text>
+    </div>
+    <Text
+      tag="h3"
+      variant="textXL"
+      mt-8
+      class="font-medium font-display text-base-900 uppercase mt-8"
+    >
+      {title}
+    </Text>
+  </div>
+  <Button
+    isLink
+    size="xs"
+    variant="muted"
+    href={url}
+    class="w-fit lg:mt-auto"
+    aria-label={`View job offer:: ${title}`}
+    title={`View job offer: ${title}`}
+  >
+    View Position
+  </Button>
+</article>

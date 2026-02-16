@@ -1,0 +1,292 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const locations = [
+  {
+    name: "Downtown",
+    address: "123 Copperlane Drive",
+    city: "Automotive District, CA 90210",
+    phone: "(555) 123-4567",
+    email: "downtown@copperlane.com",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.8173234420211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d22e3186de0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1677654321234!5m2!1sen!2sus",
+  },
+  {
+    name: "Westside",
+    address: "456 Sunset Blvd",
+    city: "West Hollywood, CA 90069",
+    phone: "(555) 987-6543",
+    email: "westside@copperlane.com",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.8173234420211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d22e3186de0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1677654321234!5m2!1sen!2sus",
+  },
+  {
+    name: "Eastside",
+    address: "789 Silver Lake Blvd",
+    city: "Los Angeles, CA 90026",
+    phone: "(555) 456-7890",
+    email: "eastside@copperlane.com",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153169!3d-37.8173234420211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d22e3186de0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1677654321234!5m2!1sen!2sus",
+  },
+];
+
+const openingHours = [
+  { day: "Monday - Friday", hours: "7:00 AM - 6:00 PM" },
+  { day: "Saturday", hours: "8:00 AM - 4:00 PM" },
+  { day: "Sunday", hours: "Closed" },
+];
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="max-w-3xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Contact Us
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          Get in Touch
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          We're here to help with all your automotive needs. Visit us, call us,
+          or send us a message.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <Text
+            tag="h2"
+            variant="textLG"
+            class="text-base-900 font-bold uppercase"
+          >
+            Send us a message
+          </Text>
+          <form class="space-y-8 mt-8">
+            <div class="space-y-2">
+              <label
+                for="first-name"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >First Name</label
+              >
+              <input
+                type="text"
+                id="first-name"
+                name="first-name"
+                class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                required
+              />
+            </div>
+            <div class="space-y-2">
+              <label
+                for="last-name"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                id="last-name"
+                name="last-name"
+                class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                required
+              />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  for="email"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="phone"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label
+                for="message"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                placeholder="How can we help you?"></textarea>
+            </div>
+            <Button size="sm" variant="default" type="submit" class="w-fit">
+              Send Message
+            </Button>
+          </form>
+        </div>
+        <div class="space-y-12">
+          <div>
+            <Text
+              tag="h2"
+              variant="textLG"
+              class="text-base-900 font-bold uppercase font-displau"
+            >
+              Visit our Workshop
+            </Text>
+            <div class="space-y-12 mt-8">
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-display text-base-900 uppercase">Address</Text
+                >
+                <address>
+                  <Text tag="p" variant="textSM" class="text-base-500 mt-2">
+                    123 Copperlane Drive<br />
+                    Automotive District, CA 90210
+                  </Text>
+                </address>
+              </div>
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-display text-base-900 uppercase">Hours</Text
+                >
+                <div class="mt-2 space-y-1">
+                  {
+                    openingHours.map((hour) => (
+                      <div class="flex items-baseline lg:justify-between">
+                        <Text
+                          tag="span"
+                          variant="textSM"
+                          class="text-base-900 font-display font-medium uppercase"
+                        >
+                          {hour.day}
+                        </Text>
+                        <span class="flex-1 mx-2 border-dotted border-b border-base-300" />
+                        <Text
+                          tag="span"
+                          variant="textSM"
+                          class="text-base-600 "
+                        >
+                          {hour.hours}
+                        </Text>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div>
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-display text-base-900 uppercase">Contact</Text
+                >
+                <div class="mt-2 flex flex-col gap-2 text-sm">
+                  <a
+                    href="tel:+15551234567"
+                    class="text-base-500 hover:text-accent-500 transition-colors"
+                  >
+                    (555) 123-4567
+                  </a>
+                  <a
+                    href="mailto:service@copperlane.com"
+                    class="text-base-500 hover:text-accent-500 transition-colors"
+                  >
+                    service@copperlane.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-24">
+        <div class="space-y-8 gap-8">
+          {
+            locations.map((location) => (
+              <div class="grid grid-cols-1 md:grid-cols-3">
+                <div>
+                  <Text
+                    tag="h3"
+                    variant="textLG"
+                    class="font-display text-base-900 uppercase"
+                  >
+                    {location.name}
+                  </Text>
+                  <address class="not-italic text-base-500 mt-2 text-sm">
+                    {location.address}
+                    <br />
+                    {location.city}
+                    <br />
+                    <br />
+                    <a
+                      href={`tel:${location.phone}`}
+                      class="hover:text-accent-500 transition-colors block"
+                    >
+                      {location.phone}
+                    </a>
+                    <a
+                      href={`mailto:${location.email}`}
+                      class="hover:text-accent-500 transition-colors block"
+                    >
+                      {location.email}
+                    </a>
+                  </address>
+                </div>
+                <div class="lg:col-span-2 min-h-100 w-full bg-base-100 rounded-3xl overflow-hidden relative group outline-4 outline-base-500/10 shadow-2xl mt-auto">
+                  <iframe
+                    src={location.mapEmbed}
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="absolute inset-0 size-full h-full grayscale group-hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

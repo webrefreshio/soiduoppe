@@ -1,0 +1,324 @@
+# .pages.yml — Pages CMS config for this site (Astro content collections)
+
+media:
+  name: images
+  label: Images
+  input: src/images
+  output: src/images
+  path: "" # start at src/images
+  extensions: [png, jpg, jpeg, webp, svg]
+
+settings:
+  content:
+    merge: true
+
+content:
+  # ---------------------
+  # LEGAL
+  # ---------------------
+  - name: legal
+    label: Legal
+    type: collection
+    path: src/content/legal
+    filename: "{primary}.md"
+    view:
+      primary: page
+      fields: [page, pubDate]
+      sort: [page]
+    fields:
+      - name: page
+        label: Page
+        type: string
+        required: true
+      - name: pubDate
+        label: Publication Date
+        type: date
+      - name: body
+        label: Body
+        type: rich-text
+
+  # ---------------------
+  # POSTS
+  # ---------------------
+  - name: posts
+    label: Posts
+    type: collection
+    path: src/content/posts
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, pubDate]
+      sort: [pubDate]
+      default: { sort: pubDate, order: desc }
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: pubDate
+        label: Publication Date
+        type: date
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: image
+        label: Cover Image
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: blog
+          - name: alt
+            label: Alt text
+            type: string
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: isFeatured
+        label: Featured
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  # ---------------------
+  # TEAM
+  # ---------------------
+  - name: team
+    label: Team
+    type: collection
+    path: src/content/team
+    filename: "{primary}.md"
+    view:
+      primary: name
+      fields: [name, role]
+      sort: [name]
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Role
+        type: string
+      - name: bio
+        label: Bio
+        type: text
+      - name: image
+        label: Profile Image
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: team
+          - name: alt
+            label: Alt text
+            type: string
+      - name: socials
+        label: Socials
+        type: object
+        fields:
+          - { name: linkedin, label: LinkedIn URL, type: string }
+          - { name: website,  label: Website URL,  type: string }
+          - { name: twitter,  label: X/Twitter URL, type: string }
+          - { name: email,    label: Email,        type: string }
+
+  # ---------------------
+  # SERVICES
+  # ---------------------
+  - name: services
+    label: Services
+    type: collection
+    path: src/content/services
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, category]
+      sort: [title]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: shortDescription
+        label: Short Description
+        type: text
+      - name: description
+        label: Description
+        type: text
+      - name: category
+        label: Category
+        type: string
+      - name: image
+        label: Image
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: services
+          - name: alt
+            label: Alt text
+            type: string
+      - name: priceFrom
+        label: Price From
+        type: string
+      - name: duration
+        label: Duration
+        type: string
+      - name: isFeatured
+        label: Featured
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  # ---------------------
+  # JOBS
+  # ---------------------
+  - name: jobs
+    label: Jobs
+    type: collection
+    path: src/content/jobs
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, department, location, postedDate]
+      sort: [postedDate]
+      default: { sort: postedDate, order: desc }
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: department
+        label: Department
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: type
+        label: Type
+        type: string
+        options: [Full-Time, Part-Time, Contract, Internship]
+      - name: salary
+        label: Salary
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: responsibilities
+        label: Responsibilities
+        type: string
+        list: true
+      - name: requirements
+        label: Requirements
+        type: string
+        list: true
+      - name: postedDate
+        label: Posted Date
+        type: date
+      - name: applyUrl
+        label: Apply URL
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+
+  # ---------------------
+  # PACKAGES
+  # ---------------------
+  - name: packages
+    label: Packages
+    type: collection
+    path: src/content/packages
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, price]
+      sort: [title]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+      - name: includedServices
+        label: Included Services
+        type: string
+        list: true
+      - name: price
+        label: Price
+        type: string
+        required: true
+      - name: duration
+        label: Duration
+        type: string
+      - name: isFeatured
+        label: Featured
+        type: boolean
+      - name: body
+        label: Body
+        type: rich-text
+
+  # ---------------------
+  # CUSTOMERS
+  # ---------------------
+  - name: customers
+    label: Customers
+    type: collection
+    path: src/content/customers
+    filename: "{primary}.md"
+    view:
+      primary: name
+      fields: [name, type, serviceUsed]
+      sort: [name]
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: type
+        label: Type
+        type: string
+        options: [Individual, Business]
+      - name: image
+        label: Image
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: customers
+          - name: alt
+            label: Alt text
+            type: string
+      - name: quote
+        label: Quote
+        type: text
+      - name: serviceUsed
+        label: Service Used
+        type: string
+      - name: vehicle
+        label: Vehicle
+        type: string
+      - name: location
+        label: Location
+        type: string
+      - name: body
+        label: Body
+        type: rich-text

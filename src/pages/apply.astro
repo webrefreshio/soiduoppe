@@ -1,0 +1,287 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Files from "@/components/fundations/icons/Files.astro";
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white">
+    <Wrapper variant="standard" class="py-24 lg:py-32">
+      <div class="max-w-3xl">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Careers
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayXL"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          Apply Now
+        </Text>
+        <Text tag="p" variant="textBase" class="mt-4 text-base-600 max-w-2xl">
+          Ready to join the Copperlane team? Fill out the form below to start
+          your application. We're always looking for talented individuals to
+          help us redefine automotive service.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24">
+        <div class="lg:col-span-2">
+          <form class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  for="first-name"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first-name"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="last-name"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last-name"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label
+                  for="email"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="phone"
+                  class="text-sm font-medium text-base-900 font-display uppercase"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="position"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >Position Applying For</label
+              >
+              <select
+                id="position"
+                name="position"
+                class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+              >
+                <option value="" disabled selected>Select a position</option>
+                <option value="service-advisor">Service Advisor</option>
+                <option value="master-technician">Master Technician</option>
+                <option value="automotive-detailer">Automotive Detailer</option>
+                <option value="parts-specialist">Parts Specialist</option>
+                <option value="shop-foreman">Shop Foreman</option>
+                <option value="lube-technician">Lube Technician</option>
+                <option value="customer-service-rep"
+                  >Customer Service Representative</option
+                >
+                <option value="service-manager">Service Manager</option>
+                <option value="tire-technician">Tire Technician</option>
+                <option value="alignment-specialist"
+                  >Alignment Specialist</option
+                >
+                <option value="warranty-administrator"
+                  >Warranty Administrator</option
+                >
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="resume"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >Resume / CV</label
+              >
+              <div
+                class="relative flex justify-center rounded-xl border border-dashed border-base-300 bg-base-50 px-6 py-10 transition-colors hover:bg-base-100"
+              >
+                <div class="text-center">
+                  <Files class="mx-auto h-12 w-12 text-base-300" />
+
+                  <div class="mt-4 flex text-sm leading-6 text-base-600">
+                    <label
+                      for="file-upload"
+                      class="relative cursor-pointer rounded-md bg-transparent font-semibold text-accent-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-accent-600 focus-within:ring-offset-2 hover:text-accent-500"
+                    >
+                      <span>Upload a file</span>
+                      <input
+                        id="file-upload"
+                        name="file-upload"
+                        type="file"
+                        class="sr-only"
+                      />
+                    </label>
+                    <p class="pl-1">or drag and drop</p>
+                  </div>
+                  <p class="text-xs leading-5 text-base-500">
+                    PDF, DOC up to 10MB
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label
+                for="message"
+                class="text-sm font-medium text-base-900 font-display uppercase"
+                >Cover Letter / Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                class="w-full rounded-lg border border-base-200 bg-base-50 px-4 py-3 text-base-900 placeholder:text-base-400 focus:border-accent-500 focus:outline-none focus:ring-1 focus:ring-accent-500 transition-all duration-200"
+                placeholder="Tell us why you'd be a great fit for Copperlane..."
+              ></textarea>
+            </div>
+
+            <Button
+            size="sm"
+            variant="default"
+            type="submit"
+              class="w-fit"
+            >
+              Submit Application
+            </Button>
+          </form>
+        </div>
+
+        <div class="lg:col-span-1">
+          <aside class="lg:sticky lg:top-32">
+            <div
+              class="flex flex-col bg-white shadow-2xl rounded-3xl outline-4 outline-base-500/10 divide-y divide-base-500/10"
+            >
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium uppercase font-display text-base-900"
+                >
+                  Why Join Us?
+                </Text>
+
+                <div class="space-y-8 mt-6">
+                  <div>
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Competitive Pay
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      We offer industry-leading salaries and performance
+                      bonuses.
+                    </Text>
+                  </div>
+
+                  <div>
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Growth Opportunities
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      Ongoing training, certifications, and career advancement
+                      paths.
+                    </Text>
+                  </div>
+
+                  <div>
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Great Benefits
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      Health insurance, paid time off, and employee discounts.
+                    </Text>
+                  </div>
+
+                  <div>
+                    <Text
+                      tag="h4"
+                      variant="textSM"
+                      class="font-medium font-display text-base-900 uppercase"
+                    >
+                      Modern Facility
+                    </Text>
+                    <Text tag="p" variant="textSM" class="mt-1 text-base-500">
+                      Work with the latest tools and technology in a clean
+                      environment.
+                    </Text>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <Text tag="p" variant="textSM" class="text-base-500">
+                  Questions about applying?
+                </Text>
+                <a
+                  href="mailto:#_"
+                  class="text-accent-600 hover:text-base-900 text-sm transition-colors mt-1 block font-medium"
+                >
+                  careers@copperlane.com
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

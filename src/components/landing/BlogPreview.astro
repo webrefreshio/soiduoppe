@@ -1,0 +1,54 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import BlogCard from "@/components/blog/BlogCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime();
+  const dateB = new Date(b.data.pubDate).getTime();
+  return dateB - dateA;
+});
+
+---
+
+<section class="bg-gradient-to-t from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24 lg:py-32">
+    <div class="max-w-3xl mx-auto text-center">
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+      >
+        Automotive Insights
+      </Text>
+      <Text
+        tag="h1"
+        variant="displayXL"
+        class="mt-8 uppercase font-display text-base-900"
+      >
+        Latest Expert Advice for Vehicle Owners
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-600 text-balance">
+        Stay informed with the latest automotive tips, maintenance guides, and
+        industry insights to keep your vehicle running at its best.
+      </Text>
+    </div>
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+      {allPosts.slice(0, 2).map((post) => <BlogCard post={post} />)}
+    </div>
+    <Button
+      isLink
+      href="/blog"
+      variant="default"
+      size="base"
+      class="mx-auto mt-12 w-fit"
+    >
+      View all articles
+    </Button>
+  </Wrapper>
+</section>

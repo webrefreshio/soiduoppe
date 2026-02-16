@@ -1,0 +1,85 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const features = [
+  {
+    title: "Expert Technicians",
+    description:
+      "Our team consists of ASE-certified mechanics with years of experience in handling all vehicle makes and models.",
+    icon: "technician",
+  },
+  {
+    title: "Transparent Pricing",
+    description:
+      "No hidden fees or surprises. We provide detailed estimates before starting any work on your vehicle.",
+    icon: "price",
+  },
+  {
+    title: "Quality Parts",
+    description:
+      "We use only high-quality OEM or equivalent parts to ensure your vehicle performs at its best.",
+    icon: "parts",
+  },
+  {
+    title: "Warranty on Work",
+    description:
+      "We stand behind our craftsmanship with a comprehensive warranty on all parts and labor.",
+    icon: "warranty",
+  },
+];
+---
+
+<section class="bg-gradient-to-t from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24">
+    <div class="items-start grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div>
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Why Choose Us
+        </Text>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          The Copperlane <br /> Difference
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          We're not just another repair shop. We're automotive enthusiasts
+          dedicated to providing the highest level of service and care for your
+          vehicle.
+        </Text>
+      </div>
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:col-span-2">
+        {
+          features.map((feature) => (
+            <div class="flex flex-col p-6 shadow-2xl pt-42 bg-base-50 rounded-3xl outline-4 outline-base-500/10">
+              <Text
+                tag="h3"
+                variant="textBase"
+                class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500 "
+              >
+                {feature.title}
+              </Text>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="mt-4 text-base-600 text-balance"
+              >
+                {feature.description}
+              </Text>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

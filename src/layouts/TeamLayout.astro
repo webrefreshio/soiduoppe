@@ -1,0 +1,143 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+// Content
+const { frontmatter } = Astro.props;
+const bioParagraphs = frontmatter.bio.split("\n").filter(Boolean);
+const intro = bioParagraphs[0];
+const restOfBio = bioParagraphs.slice(1);
+---
+
+<BaseLayout>
+  <section class="bg-gradient-to-t from-base-200 to-white overflow-hidden">
+    <Wrapper variant="standard" class="pt-24 lg:pt-32">
+      <div class="max-w-3xl mx-auto text-center">
+        <Text
+          tag="span"
+          variant="textSM"
+          class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+        >
+          Team Member
+        </Text>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="mt-8 uppercase font-display text-base-900"
+        >
+          {frontmatter.name}
+        </Text>
+        <Text
+          tag="p"
+          variant="textBase"
+          class="mt-4 text-base-600 text-balance"
+        >
+          {frontmatter.role}
+        </Text>
+      </div>
+      <Image
+        width={1920}
+        height={1080}
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+        class="size-full object-cover object-center rounded-t-3xl aspect-4/2 shadow-2xl outline-4 outline-base-500/10 mt-12"
+      />
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <div class="relative pl-4 border-l-2 border-accent-500">
+            <Text
+              tag="h2"
+              variant="textLG"
+              class="text-base-900 font-bold uppercase tracking-wide"
+            >
+              About {frontmatter.name}
+            </Text>
+            <Text
+              tag="p"
+              variant="textBase"
+              class="text-base-500 max-w-2xl mt-4 text-balance"
+            >
+              {intro}
+            </Text>
+          </div>
+          <Wrapper variant="prose" class="mt-8">
+            {restOfBio.map((paragraph) => <p>{paragraph}</p>)}
+          </Wrapper>
+        </div>
+        <div>
+          <aside class="lg:sticky lg:top-32">
+            <div
+              class="flex flex-col bg-white rounded-3xl shadow-2xl outline-4 outline-base-500/10 divide-y divide-base-500/10"
+            >
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium font-display text-base-900 uppercase"
+                >
+                  Contact
+                </Text>
+                <ul role="list" class="flex flex-col gap-2 mt-4">
+                  <a
+                    href={frontmatter.socials.twitter}
+                    class="text-base-900 capitalize text-sm hover:text-accent-500 underline-offset-4 hover:underline flex"
+                  >
+                    Twitter
+                  </a>
+                  <a
+                    href={frontmatter.socials.linkedin}
+                    class="text-base-900 capitalize text-sm hover:text-accent-500 underline-offset-4 hover:underline flex"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href={`mailto:${frontmatter.socials.email}`}
+                    class="text-base-900 capitalize text-sm hover:text-accent-500 underline-offset-4 hover:underline flex"
+                  >
+                    Email
+                  </a>
+                  <a
+                    href={frontmatter.socials.website}
+                    class="text-base-900 capitalize text-sm hover:text-accent-500 underline-offset-4 hover:underline flex"
+                  >
+                    Website
+                  </a>
+                </ul>
+              </div>
+              <div class="p-6">
+                <Text
+                  tag="h3"
+                  variant="textLG"
+                  class="font-medium font-display text-base-900 uppercase"
+                >
+                  Meet the rest of the team
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-2 text-base-500">
+                  Discover more about our talented team members.
+                </Text>
+                <Button
+                  isLink
+                  href="/team"
+                  variant="default"
+                  size="xs"
+                  class="mt-12 w-fit"
+                >
+                  View all team members
+                </Button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+// Assets
+import { Image } from "astro:assets";
+import store from "@/images/assets/store.png";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
+const features = [
+  "Clean, modern workspace",
+  "Up-to-date diagnostic equipment",
+  "Comfortable waiting area with Wi-Fi",
+  "Eco-friendly waste disposal",
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <Image
+        src={store}
+        alt="Shop Interior"
+        class="size-full aspect-4/3 object-cover rounded-3xl shadow-2xl outline-4 outline-base-500/10"
+        width={1920}
+        height={1080}
+      />
+      
+
+    <div>
+      <Text
+        tag="h2"
+        variant="displayLG"
+        class="font-display text-base-900 uppercase"
+      >
+        The Shop & Facilities
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-600">
+        We take pride in our workspace. A clean, organized shop reflects the
+        care and attention to detail we apply to every vehicle. We've invested
+        in modern equipment to ensure your car gets the best treatment possible.
+      </Text>
+      <ul class="mt-8 space-y-4">
+        {
+          features.map((feature) => (
+            <li class="flex items-center gap-3">
+              <div aria-hidden="true" class="size-2 rounded-full bg-accent-500 pointer-events-none" />
+              <Text tag="span" variant="textLG" class="text-base-700">
+                {feature}
+              </Text>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Wrapper>
+</section>
