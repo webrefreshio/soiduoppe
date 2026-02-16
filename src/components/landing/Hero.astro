@@ -5,39 +5,35 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const stats = [
   {
     id: "01",
-    title: "Years of Excellence",
-    value: "20+",
+    title: "Esmakordsest läbimisest",
+    value: "76%",
     description:
-      "Two decades of trusted automotive care, delivering precision and reliability to our community.",
+      "Parim eksamitulemus Transpordiametis - 76% meie õpilastest sooritab eksami esimesel korral.",
   },
   {
     id: "02",
-    title: "Vehicles Serviced",
-    value: "15K",
+    title: "KIA Ceed",
+    value: "100%",
     description:
-      "From classic restorations to modern diagnostics, we've successfully handled thousands of complex repairs.",
+      "Samad autod, millega Transpordiamet eksamit võtab. Harjud õppimisel õiges autos.",
   },
   {
     id: "03",
-    title: "Certified Experts",
-    value: "100%",
+    title: "Kannatlik õpetamine",
+    value: "24/7",
     description:
-      "Our team consists entirely of ASE-certified technicians dedicated to maintaining the highest standards.",
+      "Teooria õppimise saad läbida online, oma ajakava järgi. Sõidutunnid lepime kokku paindlikult.",
   },
 ];
 ---
 
 <section class="relative w-full overflow-hidden lg:h-dvh lg:p-8 ">
   <div class="absolute inset-0 overflow-hidden lg:m-4 lg:rounded-3xl">
-    <video
+    <img
       class="object-cover object-center size-full"
-      autoplay
-      muted
-      loop
-      playsinline
-    >
-      <source src="/videos/car2.mp4" type="video/mp4" />
-    </video>
+      src="/images/BE3-scaled.webp"
+      alt="Sõiduõppe ABC õppeauto"
+    />
     <div
       aria-hidden="true"
       class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
@@ -54,14 +50,14 @@ const stats = [
         variant="textSM"
         class="pl-4 font-medium text-white uppercase border-l font-display border-accent-600"
       >
-        The craft and precision behind Copperlane
+        Tartu populaarseim moto- ja autokool
       </Text>
       <Text
         tag="h1"
         variant="displayXL"
         class="mt-8 text-white uppercase font-display text-balance"
       >
-        Exceptional service for every vehicle
+        Parimate eksamitulemustega juhid tulevad meie autokoolist
       </Text>
     </div>
     <div class="mt-8 mt-auto grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-12">

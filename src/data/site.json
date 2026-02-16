@@ -1,0 +1,83 @@
+{
+  "name": "Sõiduõppe ABC",
+  "tagline": "Tartu populaarseim moto- ja autokool",
+  "description": "Parimate eksamitulemustega juhid Eestis tulevad just meie autokoolist!",
+  "contact": {
+    "address": "Kalda tee 30, Tartu",
+    "phone": "+372 507 8230",
+    "email": "soiduoppe@gmail.com",
+    "hours": "T-N 9:00-17:30"
+  },
+  "social": {
+    "facebook": ""
+  },
+  "usps": [
+    {
+      "title": "76% esikordsest läbimisest",
+      "description": "Parim eksamitulemus Transpordiametis - 76% meie õpilastest sooritab eksami esimesel korral"
+    },
+    {
+      "title": "KIA Ceed õppeautod",
+      "description": "Samad autod, millega Transpordiamet eksamit võtab - harjud õiges autos"
+    },
+    {
+      "title": "Teooria interneti teel",
+      "description": "Õpi teoreetilisi tunde netis, oma ajakava järgi - alati ja kõikjal"
+    },
+    {
+      "title": "Kannatlik ja sõbralik",
+      "description": "Meie õpetamisviis on kannatlik ja sõbralik - õppimine on meeldiv"
+    }
+  ],
+  "categories": [
+    {
+      "code": "B",
+      "name": "B-kategooria",
+      "description": "Sõiduauto juhiluba",
+      "icon": "🚗",
+      "slug": "b-kategooria"
+    },
+    {
+      "code": "A",
+      "name": "A-kategooria",
+      "description": "Mootorratta juhiload (A1, A2, A)",
+      "icon": "🏍️",
+      "slug": "a-kategooria"
+    },
+    {
+      "code": "AM",
+      "name": "AM-kategooria",
+      "description": "Mopeed, roller",
+      "icon": "🛵",
+      "slug": "am-kategooria"
+    },
+    {
+      "code": "BE",
+      "name": "BE-kategooria",
+      "description": "Sõiduauto koos haagisega",
+      "icon": "🚙",
+      "slug": "be-kategooria"
+    },
+    {
+      "code": "C",
+      "name": "C-kategooria",
+      "description": "Veoauto juhiluba",
+      "icon": "🚚",
+      "slug": "c-kategooria"
+    },
+    {
+      "code": "CE",
+      "name": "CE-kategooria",
+      "description": "Veoauto haagisega (rekka)",
+      "icon": "🚛",
+      "slug": "ce-kategooria"
+    },
+    {
+      "code": "D",
+      "name": "D-kategooria",
+      "description": "Bussi juhiluba",
+      "icon": "🚌",
+      "slug": "d-kategooria"
+    }
+  ]
+}
