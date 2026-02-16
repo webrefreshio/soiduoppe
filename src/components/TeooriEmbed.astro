@@ -13,19 +13,19 @@ interface Props {
 const { iframeUrl, courseCode, title = "Registreerimine", class: className } = Astro.props;
 ---
 
-<div class:list={["teooria-embed-wrapper", className]}>
-  <div class="teooria-embed-container">
+<div class:list={["w-full", className]}>
+  <div class="teooria-embed-container relative w-full overflow-hidden rounded-lg border border-base-200 bg-base-50">
     <iframe
       src={iframeUrl}
       title={`${title}${courseCode ? ` - ${courseCode}` : ''}`}
-      class="teooria-iframe"
+      class="absolute inset-0 w-full h-full border-0"
       loading="lazy"
       allow="forms payment"
       sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
     ></iframe>
   </div>
 
-  <div class="teooria-fallback">
+  <div class="mt-4 text-center">
     <p class="text-sm text-base-600">
       Registreerimine ei tööta?
       <a
@@ -41,23 +41,9 @@ const { iframeUrl, courseCode, title = "Registreerimine", class: className } = A
 </div>
 
 <style>
-  .teooria-embed-wrapper {
-    @apply w-full;
-  }
-
   .teooria-embed-container {
-    @apply relative w-full overflow-hidden rounded-lg border border-base-200 bg-base-50;
-    /* 16:9 aspect ratio fallback */
     padding-bottom: 75%;
     min-height: 600px;
-  }
-
-  .teooria-iframe {
-    @apply absolute inset-0 w-full h-full border-0;
-  }
-
-  .teooria-fallback {
-    @apply mt-4 text-center;
   }
 
   /* Mobile optimization */
