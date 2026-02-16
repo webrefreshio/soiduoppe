@@ -1,11 +1,11 @@
-# .pages.yml — Pages CMS config for this site (Astro content collections)
+# .pages.yml — Pages CMS config for Sõiduõppe ABC
 
 media:
   name: images
-  label: Images
-  input: src/images
-  output: src/images
-  path: "" # start at src/images
+  label: Pildid
+  input: public/images
+  output: public/images
+  path: ""
   extensions: [png, jpg, jpeg, webp, svg]
 
 settings:
@@ -14,10 +14,210 @@ settings:
 
 content:
   # ---------------------
+  # SITE DATA
+  # ---------------------
+  - name: site
+    label: Saidi seaded
+    type: file
+    file: src/data/site.json
+    fields:
+      - name: name
+        label: Autokooli nimi
+        type: string
+        required: true
+      - name: tagline
+        label: Peaslogan
+        type: string
+        required: true
+      - name: description
+        label: Kirjeldus
+        type: text
+        required: true
+      - name: contact
+        label: Kontaktandmed
+        type: object
+        fields:
+          - name: address
+            label: Aadress
+            type: string
+          - name: phone
+            label: Telefon
+            type: string
+          - name: email
+            label: E-post
+            type: string
+          - name: hours
+            label: Lahtiolekuajad
+            type: string
+      - name: usps
+        label: Põhieelised (USP-d)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Pealkiri
+            type: string
+          - name: description
+            label: Kirjeldus
+            type: text
+
+  # ---------------------
+  # COURSES
+  # ---------------------
+  - name: courses
+    label: Kursused
+    type: collection
+    path: src/content/courses
+    filename: "{primary}.md"
+    view:
+      primary: courseCode
+      fields: [courseCode, title, category, price]
+      sort: [category, courseCode]
+    fields:
+      - name: title
+        label: Kursuse nimetus
+        type: string
+        required: true
+      - name: courseCode
+        label: Kursuse kood
+        type: string
+        required: true
+        description: "Nt: B-ABC7483"
+      - name: category
+        label: Kategooria
+        type: select
+        required: true
+        options:
+          - label: A-kategooria (Mootorratas)
+            value: A
+          - label: AM-kategooria (Mopeed)
+            value: AM
+          - label: B-kategooria (Sõiduauto)
+            value: B
+          - label: BE-kategooria (Auto haagisega)
+            value: BE
+          - label: C-kategooria (Veoauto)
+            value: C
+          - label: CE-kategooria (Veoauto haagisega)
+            value: CE
+          - label: D-kategooria (Buss)
+            value: D
+          - label: X (Libedasõit jms)
+            value: X
+      - name: categoryName
+        label: Kategooria nimetus
+        type: string
+        required: true
+      - name: description
+        label: Kirjeldus
+        type: text
+      - name: price
+        label: Hind
+        type: string
+        description: "Nt: 1200€"
+      - name: priceNote
+        label: Hinna märkus
+        type: string
+      - name: duration
+        label: Kestus
+        type: string
+        description: "Nt: 6 nädalat"
+      - name: theoryHours
+        label: Teooria tunnid
+        type: string
+      - name: drivingHours
+        label: Sõidutunnid
+        type: string
+      - name: requirements
+        label: Nõuded
+        type: string
+        list: true
+      - name: includes
+        label: Hind sisaldab
+        type: string
+        list: true
+      - name: teooriaIframeUrl
+        label: Teooria.ee iframe URL
+        type: string
+        required: true
+        description: "Registreerimise iframe URL teooria.ee-st"
+      - name: startDate
+        label: Alguskuupäev
+        type: string
+      - name: isFeatured
+        label: Esiletõstetud
+        type: boolean
+      - name: body
+        label: Sisu
+        type: rich-text
+
+  # ---------------------
+  # SERVICES
+  # ---------------------
+  - name: services
+    label: Teenused
+    type: collection
+    path: src/content/services
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, type, price]
+      sort: [type, title]
+    fields:
+      - name: title
+        label: Teenuse nimetus
+        type: string
+        required: true
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+      - name: description
+        label: Kirjeldus
+        type: text
+        required: true
+      - name: shortDescription
+        label: Lühikirjeldus
+        type: text
+      - name: type
+        label: Tüüp
+        type: select
+        required: true
+        options:
+          - label: Lõppastmekoolitus
+            value: loppastme
+          - label: Libedasõit
+            value: libedasoit
+          - label: Ametikoolitus
+            value: ametikoolitus
+          - label: Muu
+            value: other
+      - name: price
+        label: Hind
+        type: string
+      - name: duration
+        label: Kestus
+        type: string
+      - name: requirements
+        label: Nõuded
+        type: string
+        list: true
+      - name: includes
+        label: Hind sisaldab
+        type: string
+        list: true
+      - name: teooriaIframeUrl
+        label: Teooria.ee iframe URL (kui on)
+        type: string
+      - name: body
+        label: Sisu
+        type: rich-text
+
+  # ---------------------
   # LEGAL
   # ---------------------
   - name: legal
-    label: Legal
+    label: Juriidiline
     type: collection
     path: src/content/legal
     filename: "{primary}.md"
@@ -27,298 +227,12 @@ content:
       sort: [page]
     fields:
       - name: page
-        label: Page
+        label: Leht
         type: string
         required: true
       - name: pubDate
-        label: Publication Date
+        label: Avaldamiskuupäev
         type: date
       - name: body
-        label: Body
-        type: rich-text
-
-  # ---------------------
-  # POSTS
-  # ---------------------
-  - name: posts
-    label: Posts
-    type: collection
-    path: src/content/posts
-    filename: "{primary}.md"
-    view:
-      primary: title
-      fields: [title, pubDate]
-      sort: [pubDate]
-      default: { sort: pubDate, order: desc }
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: pubDate
-        label: Publication Date
-        type: date
-        required: true
-      - name: description
-        label: Description
-        type: text
-      - name: image
-        label: Cover Image
-        type: object
-        fields:
-          - name: url
-            label: Image
-            type: image
-            options:
-              media: images
-              path: blog
-          - name: alt
-            label: Alt text
-            type: string
-      - name: tags
-        label: Tags
-        type: string
-        list: true
-      - name: isFeatured
-        label: Featured
-        type: boolean
-      - name: body
-        label: Body
-        type: rich-text
-
-  # ---------------------
-  # TEAM
-  # ---------------------
-  - name: team
-    label: Team
-    type: collection
-    path: src/content/team
-    filename: "{primary}.md"
-    view:
-      primary: name
-      fields: [name, role]
-      sort: [name]
-    fields:
-      - name: name
-        label: Name
-        type: string
-        required: true
-      - name: role
-        label: Role
-        type: string
-      - name: bio
-        label: Bio
-        type: text
-      - name: image
-        label: Profile Image
-        type: object
-        fields:
-          - name: url
-            label: Image
-            type: image
-            options:
-              media: images
-              path: team
-          - name: alt
-            label: Alt text
-            type: string
-      - name: socials
-        label: Socials
-        type: object
-        fields:
-          - { name: linkedin, label: LinkedIn URL, type: string }
-          - { name: website,  label: Website URL,  type: string }
-          - { name: twitter,  label: X/Twitter URL, type: string }
-          - { name: email,    label: Email,        type: string }
-
-  # ---------------------
-  # SERVICES
-  # ---------------------
-  - name: services
-    label: Services
-    type: collection
-    path: src/content/services
-    filename: "{primary}.md"
-    view:
-      primary: title
-      fields: [title, category]
-      sort: [title]
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: shortDescription
-        label: Short Description
-        type: text
-      - name: description
-        label: Description
-        type: text
-      - name: category
-        label: Category
-        type: string
-      - name: image
-        label: Image
-        type: object
-        fields:
-          - name: url
-            label: Image
-            type: image
-            options:
-              media: images
-              path: services
-          - name: alt
-            label: Alt text
-            type: string
-      - name: priceFrom
-        label: Price From
-        type: string
-      - name: duration
-        label: Duration
-        type: string
-      - name: isFeatured
-        label: Featured
-        type: boolean
-      - name: body
-        label: Body
-        type: rich-text
-
-  # ---------------------
-  # JOBS
-  # ---------------------
-  - name: jobs
-    label: Jobs
-    type: collection
-    path: src/content/jobs
-    filename: "{primary}.md"
-    view:
-      primary: title
-      fields: [title, department, location, postedDate]
-      sort: [postedDate]
-      default: { sort: postedDate, order: desc }
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: department
-        label: Department
-        type: string
-      - name: location
-        label: Location
-        type: string
-      - name: type
-        label: Type
-        type: string
-        options: [Full-Time, Part-Time, Contract, Internship]
-      - name: salary
-        label: Salary
-        type: string
-      - name: description
-        label: Description
-        type: text
-      - name: responsibilities
-        label: Responsibilities
-        type: string
-        list: true
-      - name: requirements
-        label: Requirements
-        type: string
-        list: true
-      - name: postedDate
-        label: Posted Date
-        type: date
-      - name: applyUrl
-        label: Apply URL
-        type: string
-      - name: body
-        label: Body
-        type: rich-text
-
-  # ---------------------
-  # PACKAGES
-  # ---------------------
-  - name: packages
-    label: Packages
-    type: collection
-    path: src/content/packages
-    filename: "{primary}.md"
-    view:
-      primary: title
-      fields: [title, price]
-      sort: [title]
-    fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: description
-        label: Description
-        type: text
-      - name: includedServices
-        label: Included Services
-        type: string
-        list: true
-      - name: price
-        label: Price
-        type: string
-        required: true
-      - name: duration
-        label: Duration
-        type: string
-      - name: isFeatured
-        label: Featured
-        type: boolean
-      - name: body
-        label: Body
-        type: rich-text
-
-  # ---------------------
-  # CUSTOMERS
-  # ---------------------
-  - name: customers
-    label: Customers
-    type: collection
-    path: src/content/customers
-    filename: "{primary}.md"
-    view:
-      primary: name
-      fields: [name, type, serviceUsed]
-      sort: [name]
-    fields:
-      - name: name
-        label: Name
-        type: string
-        required: true
-      - name: type
-        label: Type
-        type: string
-        options: [Individual, Business]
-      - name: image
-        label: Image
-        type: object
-        fields:
-          - name: url
-            label: Image
-            type: image
-            options:
-              media: images
-              path: customers
-          - name: alt
-            label: Alt text
-            type: string
-      - name: quote
-        label: Quote
-        type: text
-      - name: serviceUsed
-        label: Service Used
-        type: string
-      - name: vehicle
-        label: Vehicle
-        type: string
-      - name: location
-        label: Location
-        type: string
-      - name: body
-        label: Body
+        label: Sisu
         type: rich-text

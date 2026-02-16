@@ -1,34 +1,47 @@
 {
-  "$ref": "#/definitions/services",
+  "$ref": "#/definitions/courses",
   "definitions": {
-    "services": {
+    "courses": {
       "type": "object",
       "properties": {
         "title": {
           "type": "string"
         },
-        "slug": {
+        "courseCode": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "A",
+            "AM",
+            "B",
+            "BE",
+            "C",
+            "CE",
+            "D",
+            "X"
+          ]
+        },
+        "categoryName": {
           "type": "string"
         },
         "description": {
           "type": "string"
         },
-        "shortDescription": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "loppastme",
-            "libedasoit",
-            "ametikoolitus",
-            "other"
-          ]
-        },
         "price": {
           "type": "string"
         },
+        "priceNote": {
+          "type": "string"
+        },
         "duration": {
+          "type": "string"
+        },
+        "theoryHours": {
+          "type": "string"
+        },
+        "drivingHours": {
           "type": "string"
         },
         "requirements": {
@@ -46,15 +59,23 @@
         "teooriaIframeUrl": {
           "type": "string"
         },
+        "startDate": {
+          "type": "string"
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "default": false
+        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
         "title",
-        "slug",
-        "description",
-        "type"
+        "courseCode",
+        "category",
+        "categoryName",
+        "teooriaIframeUrl"
       ],
       "additionalProperties": false
     }

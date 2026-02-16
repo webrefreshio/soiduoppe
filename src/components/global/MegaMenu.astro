@@ -3,61 +3,75 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import siteData from "@/data/site.json";
+
 const megaMenuSections = [
   {
-    title: "Services",
-    description: "Explore our professional services",
+    title: "Põhikategooriad",
+    description: "Populaarseimad juhiloakategooriad",
     links: [
       {
-        href: "/services",
-        label: "All Services",
-        description: "Browse our complete service catalog",
+        href: "/kursused/b-kategooria/",
+        label: "🚗 B-kategooria",
+        description: "Sõiduauto juhiluba",
       },
       {
-        href: "/service-packages",
-        label: "Service Packages",
-        description: "Bundled services for better value",
+        href: "/kursused/a-kategooria/",
+        label: "🏍️ A-kategooria",
+        description: "Mootorratta juhiload (A1, A2, A)",
       },
       {
-        href: "/pricing",
-        label: "Pricing",
-        description: "Transparent pricing for all services",
+        href: "/kursused/am-kategooria/",
+        label: "🛵 AM-kategooria",
+        description: "Mopeed, roller",
       },
     ],
   },
   {
-    title: "Resources",
-    description: "Help and information",
+    title: "Rasketehnika",
+    description: "Veoauto ja bussi kategooriad",
     links: [
       {
-        href: "/help-center",
-        label: "Help Center",
-        description: "Find answers to common questions",
+        href: "/kursused/c-kategooria/",
+        label: "🚚 C-kategooria",
+        description: "Veoauto juhiluba",
       },
-      { href: "/faq", label: "FAQ", description: "Frequently asked questions" },
-      { href: "/blog", label: "Blog", description: "Latest news and articles" },
+      {
+        href: "/kursused/ce-kategooria/",
+        label: "🚛 CE-kategooria",
+        description: "Veoauto haagisega",
+      },
+      {
+        href: "/kursused/d-kategooria/",
+        label: "🚌 D-kategooria",
+        description: "Bussi juhiluba",
+      },
+      {
+        href: "/kursused/be-kategooria/",
+        label: "🚙 BE-kategooria",
+        description: "Sõiduauto haagisega",
+      },
     ],
   },
   {
-    title: "Company",
-    description: "Learn more about us",
+    title: "Muud teenused",
+    description: "Täiendkoolitused",
     links: [
       {
-        href: "/about",
-        label: "About Us",
-        description: "Our story and mission",
+        href: "/loppastmekoolitus/",
+        label: "Lõppastmekoolitus",
+        description: "Libedasõit ja pimeda aja koolitus",
       },
       {
-        href: "/team",
-        label: "Our Team",
-        description: "Meet the people behind Copperlane",
+        href: "/ametikoolitus/",
+        label: "Ametikoolitus",
+        description: "Kood 95, ADR, tõstukijuht",
       },
       {
-        href: "/customers",
-        label: "Customers",
-        description: "Success stories and testimonials",
+        href: "/kursused/",
+        label: "Kõik kursused",
+        description: "Vaata kõiki saadaolevaid kursuseid",
       },
-      { href: "/jobs", label: "Careers", description: "Join our growing team" },
     ],
   },
 ];

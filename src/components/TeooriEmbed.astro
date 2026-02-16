@@ -1,0 +1,77 @@
+---
+/**
+ * Teooria.ee registration iframe embed component
+ * Responsive wrapper with fallback link
+ */
+interface Props {
+  iframeUrl: string;
+  courseCode?: string;
+  title?: string;
+  class?: string;
+}
+
+const { iframeUrl, courseCode, title = "Registreerimine", class: className } = Astro.props;
+---
+
+<div class:list={["teooria-embed-wrapper", className]}>
+  <div class="teooria-embed-container">
+    <iframe
+      src={iframeUrl}
+      title={`${title}${courseCode ? ` - ${courseCode}` : ''}`}
+      class="teooria-iframe"
+      loading="lazy"
+      allow="forms payment"
+      sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+    ></iframe>
+  </div>
+
+  <div class="teooria-fallback">
+    <p class="text-sm text-base-600">
+      Registreerimine ei tööta?
+      <a
+        href={iframeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-accent-600 hover:text-accent-700 underline font-medium"
+      >
+        Ava teooria.ee otse →
+      </a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .teooria-embed-wrapper {
+    @apply w-full;
+  }
+
+  .teooria-embed-container {
+    @apply relative w-full overflow-hidden rounded-lg border border-base-200 bg-base-50;
+    /* 16:9 aspect ratio fallback */
+    padding-bottom: 75%;
+    min-height: 600px;
+  }
+
+  .teooria-iframe {
+    @apply absolute inset-0 w-full h-full border-0;
+  }
+
+  .teooria-fallback {
+    @apply mt-4 text-center;
+  }
+
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    .teooria-embed-container {
+      min-height: 700px;
+      padding-bottom: 100%;
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .teooria-embed-container {
+      min-height: 650px;
+    }
+  }
+</style>

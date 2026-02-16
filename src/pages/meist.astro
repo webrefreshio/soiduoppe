@@ -1,0 +1,125 @@
+---
+// Meist - About Sõiduõppe ABC
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import siteData from "@/data/site.json";
+---
+
+<BaseLayout>
+  <section class="py-24 bg-base-50">
+    <Wrapper variant="standard">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <Text tag="h1" variant="displayLG" class="font-display uppercase text-base-900">
+            Meist
+          </Text>
+
+          <Text tag="p" variant="textXL" class="mt-6 text-base-700">
+            {siteData.tagline}
+          </Text>
+        </div>
+
+        <!-- Story -->
+        <div class="bg-white rounded-2xl border border-base-200 p-8 mb-12">
+          <Text tag="h2" variant="textXL" class="font-display font-bold text-base-900 mb-6">
+            {siteData.description}
+          </Text>
+
+          <div class="prose prose-lg max-w-none text-base-600">
+            <p>
+              Sõiduõppe ABC on Tartu piirkonna juhtiv autokool, mis pakub kvaliteetset juhikoolitust
+              kõikides kategooriates - alates mopeedist kuni raskeveoautoni.
+            </p>
+
+            <p>
+              Meie eesmärk on tagada, et meie õpilased saaksid parimad teadmised ja oskused,
+              mis neil on vaja ohutult liikluses osaleda.
+            </p>
+
+            <p>
+              Kasutame koolituses KIA Ceed õppeautosid - täpselt samu autosid, mida kasutab
+              Transpordiamet eksamitel. Nii saad harjuda õige autoga ja eksamil ei ole sulle
+              midagi üllatuslikku.
+            </p>
+          </div>
+        </div>
+
+        <!-- USPs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {siteData.usps.map((usp) => (
+            <div class="bg-white rounded-xl border border-base-200 p-6">
+              <Text tag="h3" variant="textLG" class="font-display font-bold text-base-900 mb-3">
+                {usp.title}
+              </Text>
+
+              <Text tag="p" variant="textBase" class="text-base-600">
+                {usp.description}
+              </Text>
+            </div>
+          ))}
+        </div>
+
+        <!-- Stats -->
+        <div class="bg-accent-50 rounded-2xl border-2 border-accent-200 p-8 mb-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <Text tag="div" variant="displayLG" class="font-display font-bold text-accent-600">
+                76%
+              </Text>
+              <Text tag="p" variant="textBase" class="mt-2 text-base-700 font-medium">
+                Esmakordsest läbimisest
+              </Text>
+            </div>
+
+            <div>
+              <Text tag="div" variant="displayLG" class="font-display font-bold text-accent-600">
+                KIA Ceed
+              </Text>
+              <Text tag="p" variant="textBase" class="mt-2 text-base-700 font-medium">
+                Samad autod kui eksamil
+              </Text>
+            </div>
+
+            <div>
+              <Text tag="div" variant="displayLG" class="font-display font-bold text-accent-600">
+                24/7
+              </Text>
+              <Text tag="p" variant="textBase" class="mt-2 text-base-700 font-medium">
+                Online teooria õppimine
+              </Text>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="text-center bg-white rounded-2xl border border-base-200 p-8">
+          <Text tag="h2" variant="textXL" class="font-display font-bold text-base-900 mb-4">
+            Alusta oma juhiloateed täna!
+          </Text>
+
+          <Text tag="p" variant="textLG" class="text-base-600 mb-6">
+            Võta meiega ühendust ja vali sobiv kursus
+          </Text>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/kursused/"
+              class="inline-flex items-center gap-x-2 px-6 py-3 bg-accent-600 text-white rounded-lg hover:bg-accent-700 transition-colors font-medium"
+            >
+              Vaata kursuseid
+            </a>
+
+            <a
+              href="/kontakt/"
+              class="inline-flex items-center gap-x-2 px-6 py-3 bg-white text-base-900 rounded-lg hover:bg-base-50 transition-colors font-medium border border-base-300"
+            >
+              Võta ühendust
+            </a>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

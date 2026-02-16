@@ -1,0 +1,76 @@
+---
+// Courses index - shows all categories
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import siteData from "@/data/site.json";
+
+const categories = siteData.categories;
+---
+
+<BaseLayout>
+  <section class="py-24 bg-base-50">
+    <Wrapper variant="standard">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Text tag="h1" variant="displayLG" class="font-display uppercase text-base-900">
+          Vali oma kategooria
+        </Text>
+        <Text tag="p" variant="textLG" class="mt-6 text-base-600">
+          Pakume juhikoolitust kõikides kategooriates - mopeedist kuni raskeveoautoni.
+          Vali sobiv kategooria ja registreeru kursusele.
+        </Text>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((category) => (
+          <a
+            href={`/kursused/${category.slug}/`}
+            class="group relative overflow-hidden rounded-2xl bg-white border border-base-200 hover:border-accent-500 transition-all duration-300 hover:shadow-xl p-8"
+          >
+            <div class="text-6xl mb-4 transition-transform duration-300 group-hover:scale-110">
+              {category.icon}
+            </div>
+
+            <Text tag="h2" variant="textXL" class="font-display font-bold text-base-900 uppercase">
+              {category.code}-kategooria
+            </Text>
+
+            <Text tag="h3" variant="textLG" class="mt-2 text-base-700">
+              {category.name}
+            </Text>
+
+            <Text tag="p" variant="textBase" class="mt-4 text-base-600">
+              {category.description}
+            </Text>
+
+            <div class="mt-6 flex items-center text-accent-600 font-medium group-hover:gap-x-2 transition-all">
+              <span>Vaata kursuseid</span>
+              <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center">
+        <div class="inline-flex items-center gap-x-3 px-6 py-4 bg-accent-50 rounded-xl border border-accent-200">
+          <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <Text tag="p" variant="textBase" class="text-base-700">
+            Vajad abi kategooria valimisel?
+            <a href="/kontakt/" class="text-accent-600 hover:text-accent-700 font-medium underline ml-1">
+              Võta meiega ühendust
+            </a>
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

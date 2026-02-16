@@ -13,12 +13,11 @@ import MobileMenu from "@/components/global/MobileMenu.astro";
 import Close from "@/components/fundations/icons/Close.astro";
 import Burger from "@/components/fundations/icons/Burger.astro";
 const quickLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/packages", label: "Packages" },
-  { href: "/customers", label: "Customers" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/system/overview", label: "Overview" },
+  { href: "/kursused", label: "Kursused" },
+  { href: "/loppastmekoolitus", label: "Lõppastmekoolitus" },
+  { href: "/ametikoolitus", label: "Ametikoolitus" },
+  { href: "/meist", label: "Meist" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 // Sets link color based on current path
 const currentPath = Astro.url.pathname;
@@ -39,7 +38,7 @@ const currentPath = Astro.url.pathname;
           class="text-sm flex items-center gap-2 focus:outline-none font-medium text-white group transition-colors duration-200 hover:text-white group"
           aria-expanded="false"
         >
-          Explore
+          Vali kategooria
           <Plus
             slot="icon"
             size="sm"
@@ -67,9 +66,9 @@ const currentPath = Astro.url.pathname;
           isLink
           size="xs"
           variant="accent"
-          href="https://lexingtonthemes.com/templates/copperlane"
+          href="tel:+3725078230"
         >
-          Buy Copperlane
+          +372 507 8230
         </Button>
         <Button
           iconOnly

@@ -1,0 +1,136 @@
+---
+// Course category listing page
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import siteData from "@/data/site.json";
+
+export async function getStaticPaths() {
+  const allCourses = await getCollection("courses");
+
+  // Group by category slug
+  const categories = siteData.categories;
+
+  return categories.map((category) => {
+    const categoryCourses = allCourses.filter(
+      (course) => course.data.category === category.code
+    );
+
+    return {
+      params: { category: category.slug },
+      props: { category, courses: categoryCourses },
+    };
+  });
+}
+
+const { category, courses } = Astro.props;
+---
+
+<BaseLayout>
+  <section class="py-24 bg-base-50">
+    <Wrapper variant="standard">
+      <!-- Category Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-7xl mb-6">{category.icon}</div>
+
+        <Text tag="h1" variant="displayLG" class="font-display uppercase text-base-900">
+          {category.code}-kategooria
+        </Text>
+
+        <Text tag="p" variant="textXL" class="mt-4 text-base-700">
+          {category.name}
+        </Text>
+
+        <Text tag="p" variant="textLG" class="mt-6 text-base-600">
+          {category.description}
+        </Text>
+      </div>
+
+      <!-- Courses Grid -->
+      {courses.length > 0 ? (
+        <>
+          <div class="mb-8">
+            <Text tag="h2" variant="textXL" class="font-display font-bold text-base-900">
+              Saadaolevad kursused ({courses.length})
+            </Text>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {courses.map((course) => (
+              <a
+                href={`/kursused/${course.slug}/`}
+                class="group relative overflow-hidden rounded-xl bg-white border border-base-200 hover:border-accent-500 transition-all duration-300 hover:shadow-lg p-6"
+              >
+                <div class="flex items-start justify-between mb-4">
+                  <div class="flex-1">
+                    <Text tag="span" variant="textSM" class="font-mono text-accent-600 font-medium">
+                      {course.data.courseCode}
+                    </Text>
+
+                    <Text tag="h3" variant="textLG" class="mt-2 font-display font-bold text-base-900">
+                      {course.data.title}
+                    </Text>
+                  </div>
+
+                  {course.data.isFeatured && (
+                    <span class="inline-flex items-center px-2 py-1 rounded-md bg-accent-100 text-accent-700 text-xs font-medium">
+                      Populaarne
+                    </span>
+                  )}
+                </div>
+
+                {course.data.description && (
+                  <Text tag="p" variant="textBase" class="text-base-600 line-clamp-3">
+                    {course.data.description}
+                  </Text>
+                )}
+
+                <div class="mt-6 pt-6 border-t border-base-200">
+                  {course.data.price && (
+                    <div class="flex items-baseline gap-x-2 mb-4">
+                      <Text tag="span" variant="textXL" class="font-bold text-base-900">
+                        {course.data.price}
+                      </Text>
+                    </div>
+                  )}
+
+                  <div class="flex items-center text-accent-600 font-medium group-hover:gap-x-2 transition-all">
+                    <span>Vaata kursust ja registreeru</span>
+                    <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  class="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                ></div>
+              </a>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="text-center py-12">
+          <Text tag="p" variant="textLG" class="text-base-600">
+            Hetkel pole selles kategoorias kursuseid saadaval.
+          </Text>
+        </div>
+      )}
+
+      <!-- Back Link -->
+      <div class="mt-12 text-center">
+        <a
+          href="/kursused/"
+          class="inline-flex items-center gap-x-2 text-base-700 hover:text-accent-600 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          <span>Tagasi kategooriate juurde</span>
+        </a>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

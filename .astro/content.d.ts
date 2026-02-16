@@ -173,23 +173,29 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		"customers": Record<string, {
+		"courses": Record<string, {
   id: string;
   render(): Render[".md"];
   slug: string;
   body: string;
+  collection: "courses";
+  data: InferEntrySchema<"courses">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"customers": Record<string, {
+  id: string;
+  body?: string;
   collection: "customers";
-  data: InferEntrySchema<"customers">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
 "jobs": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "jobs";
-  data: InferEntrySchema<"jobs">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
@@ -205,21 +211,17 @@ declare module 'astro:content' {
 }>;
 "packages": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "packages";
-  data: InferEntrySchema<"packages">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
 "posts": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
@@ -235,11 +237,9 @@ declare module 'astro:content' {
 }>;
 "team": Record<string, {
   id: string;
-  render(): Render[".md"];
-  slug: string;
-  body: string;
+  body?: string;
   collection: "team";
-  data: InferEntrySchema<"team">;
+  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
