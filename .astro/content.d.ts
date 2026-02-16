@@ -183,22 +183,6 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
-"customers": Record<string, {
-  id: string;
-  body?: string;
-  collection: "customers";
-  data: any;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
-"jobs": Record<string, {
-  id: string;
-  body?: string;
-  collection: "jobs";
-  data: any;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
 "legal": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -209,22 +193,6 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
-"packages": Record<string, {
-  id: string;
-  body?: string;
-  collection: "packages";
-  data: any;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
-"posts": Record<string, {
-  id: string;
-  body?: string;
-  collection: "posts";
-  data: any;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
 "services": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -232,14 +200,6 @@ declare module 'astro:content' {
   body: string;
   collection: "services";
   data: InferEntrySchema<"services">;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
-"team": Record<string, {
-  id: string;
-  body?: string;
-  collection: "team";
-  data: any;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
