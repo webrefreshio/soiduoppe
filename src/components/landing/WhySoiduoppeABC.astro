@@ -1,0 +1,56 @@
+---
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+import siteData from "@/data/site.json";
+
+const usps = siteData.usps;
+---
+
+<section class="bg-gradient-to-t from-base-200 to-white">
+  <Wrapper variant="standard" class="py-24">
+    <div class="max-w-3xl mx-auto text-center">
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+      >
+        Miks valida meid
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayXL"
+        class="mt-8 uppercase font-display text-base-900"
+      >
+        Tartu populaarseim moto- ja autokool
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-600 text-balance">
+        Oleme uhked oma eksamitulemuste üle ja meie õpilased hindavad kõrgelt meie kannatlikku ning sõbralikku õpetamisviisi.
+      </Text>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        usps.map((usp) => (
+          <div class="p-6 shadow-2xl pt-42 bg-base-50 rounded-3xl outline-4 outline-base-500/10">
+            <Text
+              tag="h3"
+              variant="textBase"
+              class="pl-4 font-medium uppercase border-l-2 font-display text-base-900 border-accent-500"
+            >
+              {usp.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textXS"
+              class="mt-4 text-base-600 text-balance"
+            >
+              {usp.description}
+            </Text>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

@@ -1,0 +1,72 @@
+---
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+import siteData from "@/data/site.json";
+
+const categories = siteData.categories;
+---
+
+<section>
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div class="max-w-3xl mx-auto text-center">
+      <Text
+        tag="span"
+        variant="textSM"
+        class="pl-4 font-medium uppercase border-l text-base-900 font-display border-accent-500"
+      >
+        Meie kursused
+      </Text>
+      <Text
+        tag="h2"
+        variant="displayXL"
+        class="mt-8 uppercase font-display text-base-900"
+      >
+        Vali sobiv kategooria
+      </Text>
+      <Text tag="p" variant="textBase" class="mt-4 text-base-600 text-balance">
+        Pakume kõiki juhilubaklasse - alates mopeedist kuni bussijuhini. Vali endale sobiv ja alusta õppimist kohe!
+      </Text>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        categories.map((category) => (
+          <a
+            href={`/kursused/${category.slug}/`}
+            class="group relative flex flex-col p-8 bg-base-50 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-base-200 hover:border-accent-500"
+          >
+            <div class="text-6xl mb-4">{category.icon}</div>
+            <Text
+              tag="h3"
+              variant="textXL"
+              class="font-bold font-display text-base-900 uppercase"
+            >
+              {category.name}
+            </Text>
+            <Text
+              tag="p"
+              variant="textSM"
+              class="mt-2 text-base-600"
+            >
+              {category.description}
+            </Text>
+            <div class="mt-4 flex items-center text-accent-600 font-medium text-sm group-hover:translate-x-2 transition-transform">
+              Vaata kursusi →
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 text-center">
+      <a
+        href="/kursused/"
+        class="inline-flex items-center px-6 py-3 bg-accent-500 text-white rounded-lg font-medium hover:bg-accent-600 transition-colors"
+      >
+        Kõik kursused
+      </a>
+    </div>
+  </Wrapper>
+</section>

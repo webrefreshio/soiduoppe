@@ -1,0 +1,58 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Foundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+import siteData from "@/data/site.json";
+---
+
+<section class="bg-gradient-to-b from-base-200 to-white">
+  <Wrapper variant="standard" class="py-12 lg:py-24">
+    <div
+      class="relative p-8 overflow-hidden shadow-2xl rounded-3xl bg-gradient-to-br from-accent-500 to-accent-600 lg:p-20 outline-4 outline-base-500/10"
+    >
+      <div
+        class="absolute inset-0 opacity-10"
+        style="background-image: url('/images/BE3-scaled.webp'); background-size: cover; background-position: center;"
+      >
+      </div>
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-gradient-to-b from-base-900/70 via-base-900/50 to-base-900/90"
+      >
+      </div>
+      <div
+        class="relative items-center text-center grid grid-cols-1 gap-8 lg:gap-12"
+      >
+        <div>
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="text-white uppercase font-display"
+          >
+            Alusta oma esimest sõidutundi kohe!
+          </Text>
+          <Text tag="p" variant="textLG" class="mt-4 text-base-200">
+            Vali sobiv kategooria, registreeru kursusele ja alusta õppimist. Teooria saad õppida 24/7 online.
+          </Text>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <Button isLink href="/kursused" variant="accent" size="lg">
+            Vaata kursusi
+          </Button>
+          <Button
+            isLink
+            href={`tel:${siteData.contact.phone}`}
+            variant="muted"
+            size="lg"
+          >
+            {siteData.contact.phone}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>
